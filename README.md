@@ -65,7 +65,7 @@
 
 2. Execute os seguintes comandos:
 
-❗️ Certifique-se de executar esses comandos em sequência e aguarde até que cada comando seja concluído antes de prosseguir para o próximo.
+```❗️ Certifique-se de executar esses comandos em sequência e aguarde até que cada comando seja concluído antes de prosseguir para o próximo.```
 ```
 $ pkg upgrade -y && pkg update -y
 $ pkg install git -y $ pkg install nodejs -y $ pkg install ffmpeg -y
