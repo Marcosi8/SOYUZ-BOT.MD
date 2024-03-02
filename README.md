@@ -45,7 +45,7 @@
 
 ## Dúvidas ⛔️
 
-- [Entre em contato comigo no WhatsApp](https://wa.me/558881647724?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20o%20Soyuz%20Bot)
+- [Entre em contato comigo no WhatsApp](https://wa.me/558881647724?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20o%20bot)
 - Meu e-mail: [marcosrian494@gmail.com](mailto:marcosrian494@gmail.com) 
 
 ---
@@ -96,10 +96,10 @@ $ npm start
 1. Fork
 2. Não se esqueça de dar a este repositório uma estrela ⭐️.
 3. Este script não é feito para fins ilegais. Não temos qualquer ligação com o WhatsApp Oficial.
-4. Se você tiver algum problema, [entre em contato comigo](https://wa.me/558881647724text=Ol%C3%A1%20*FG98F*%2C%20preciso%20de%20ajuda%20com%20o%20Soyuz%20Bot) para obter ajuda.
+4. Se você tiver algum problema, [entre em contato comigo](https://wa.me/558881647724?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20o%20bot) para obter ajuda.
 
 ---
 
 ## Agradecimentos 
-- [Marcosi8] - Por vários comandos
-- [FG98F] - Pela base.
+Marcosi8 - Por vários comandos.
+FG98F - Pela base.
