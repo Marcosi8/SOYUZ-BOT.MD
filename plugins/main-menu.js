@@ -8,9 +8,9 @@ let tags = {
   'main': 'SOBRE 🇧🇷',
   'prime': 'MAIS USADOS 🥳',
   'chat': 'CHAT ANÔNIMO 👻',
-  'ia': 'IA/CHATGPT 🤖',
+  'ia': '%readmore IA/CHATGPT 🤖',
   'group': 'GRUPO 👮‍',
-  'econ': '%readmore NIVEL & ECONOMIA 💵',
+  'econ': 'NIVEL & ECONOMIA 💵',
   'rg': 'REGISTRO 🗂',
   'sticker': 'STICKER 🎉',
   'img': 'IMAGEM 📷',
@@ -28,7 +28,7 @@ let tags = {
   //'ansfw': 'NSFW ANIME 🔞', 
   'owner': 'OWNER 👑', 
   'advanced': 'AVANÇADO 💻',
-  'bebot': 'BEBOT',
+  //'bebot': 'BEBOT',
 }
 const defaultMenu = {
   before: `
