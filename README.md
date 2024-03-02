@@ -75,7 +75,7 @@
 $ pkg upgrade -y && pkg update -y
 $ pkg install git -y $ pkg install nodejs -y $ pkg install ffmpeg -y
 $ pkg install imagemagick -y
-$ git clone https://github.com/<link do seu repositório>
+$ git clone https://github.com/<link do seu fork>
 $ cd SOYUZ-BOT.MD
 $ npm i
 $ npm start
