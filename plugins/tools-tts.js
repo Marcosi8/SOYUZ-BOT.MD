@@ -30,7 +30,7 @@ handler.command = ['tts', 'voz', 'falar']
 
 export default handler
 
-function tts(text, lang = 'es-es') {
+function tts(text, lang = 'pt-br') {
   console.log(lang, text)
   return new Promise((resolve, reject) => {
     try {
