@@ -13,7 +13,7 @@ let link = 'https://chat.whatsapp.com/' + await conn.groupInviteCode(group)
 await conn.reply(text+'@s.whatsapp.net', `Foi add\n\n${link}`, m, {mentions: [m.sender]})
 m.reply(`*@${who.split`@`[0]}*\nAdicionado ao grupo!`) 
 }
-handler.help = ['add', '+'].map(v => v + ' número')
+handler.help = ['add + nmr']
 handler.tags = ['group']
 handler.command = /^(add|agregar|invitar|invite|añadir|\+)$/i
 handler.group = true
