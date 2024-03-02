@@ -66,7 +66,7 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
       break
     case 'antilink':
     case 'antilinkwa':
-    case 'antilinkwha':
+    case 'antilink1':
       if (m.isGroup) {
         if (!(isAdmin || isOwner)) {
           global.dfail('admin', m, conn)
@@ -205,7 +205,7 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
  ${usedPrefix}welcome/bemvindo
  ${usedPrefix}setbye
  ${usedPrefix}antifake
- ${usedPrefix}antilink (com kick user)
+ ${usedPrefix}antilink1 (com kick user)
  ${usedPrefix}antilink2 (sem kick user)
  ${usedPrefix}detect 
  ${usedPrefix}document
