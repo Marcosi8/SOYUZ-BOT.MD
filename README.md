@@ -52,8 +52,11 @@
 
 ## Mudar o número do dono aqui
 
+[![Bifurcar Repositório](https://img.shields.io/badge/Bifurcar-Repository-blue?style=for-the-badge&logo=github)](https://github.com/Marcosi8/SOYUZ-BOT.MD/fork)
+
 <a href="https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js"><img src="https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js" align="center" width="90" /> </a>
 
+> **Importante**: Antes de fazer alterações no número do proprietário, certifique-se de bifurcar este repositório clicando no botão acima. Isso permitirá que você faça alterações sem afetar o repositório original.
 ---
 
 ## Instalar no Termux
