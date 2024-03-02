@@ -56,7 +56,7 @@
 
 [Clique aqui para acessar o arquivo config.js](https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js)
 
-> **Muito Importante**: Antes de fazer alterações no número do proprietário, certifique-se de bifurcar este repositório clicando no botão acima. Isso permitirá que você faça alterações, pois irá criar um fork totalmente seu. em seguida, alterar "config.js" em seu fork. 
+> **Muito Importante**: Antes de fazer alterações no número do proprietário, certifique-se de bifurcar este repositório clicando no botão acima. Isso permitirá que você faça alterações, pois irá criar um fork totalmente seu. Em seguida, alterar "config.js" em seu fork. 
 ---
 
 ## Instalar no Termux
