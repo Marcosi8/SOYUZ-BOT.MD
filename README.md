@@ -33,7 +33,7 @@
 ---
 
 ## Sumário
-- [Clique Aqui Para Dúvidas ⛔️](#clique-aqui-para-ajuda-%EF%B8%8F)
+- [Clique Aqui Para Dúvidas ⛔️](Dúvidas)
 - [Mudar o número do dono aqui](https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js)
 - [Instalar em Termux](#implante-no-railway)
 - [Implante no Replit](#implante-no-replit)
@@ -43,7 +43,7 @@
 
 ---
 
-## Clique Aqui Para Dúvidas ⛔️
+## Dúvidas ⛔️
 
 - [Entre em contato comigo no WhatsApp](https://wa.me/558881647724?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20o%20Soyuz%20Bot)
 - Meu e-mail: [marcosrian494@gmail.com](mailto:marcosrian494@gmail.com) 
