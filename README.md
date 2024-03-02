@@ -52,7 +52,7 @@
 
 ## Mudar o número do dono aqui
 
-<a href="https://LINKDOQR"><img src="LINKDAIMAGEMDOQR" align="center" width="90" /> </a>
+<a href="https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js"><img src="https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js" align="center" width="90" /> </a>
 
 ---
 
