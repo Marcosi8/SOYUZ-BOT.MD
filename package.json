@@ -1,7 +1,7 @@
 { 
-    "name": "senna-bot",
+    "name": "SOYUZ-BOT.MD",
     "version": "3.0.0",
-    "description": "Customizable WhatsApp Bot",
+    "description": "WhatsApp Bot",
     "main": "index.js",
     "type": "module",
     "directories": {
@@ -21,21 +21,21 @@
         "js-whatsapp",
         "whatsapp",
         "dylux-bot",
-        "senna",
+        "soyuz",
         "multi-device",
-        "senna-bot",
+        "soyuz-bot",
         "baileys-md"
     ],
-    "homepage": "https://github.com/FG98F/senna-bot",
+    "homepage": "https://github.com/Marcosi8/SOYUZ-BOT.MD",
     "author": {
-        "name": "FG98"
+        "name": "Marcosi8"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/FG98F/senna-bot.git"
+        "url": "git+https://github.com/Marcosi8/SOYUZ-BOT.MD.git"
     },
     "bugs": {
-        "url": "https://github.com/FG98F/senna-bot/issues"
+        "url": "https://github.com/Marcosi8/SOYUZ-BOT.MD/issues"
     },
     "license": "GPL-3.0-or-later",
     "dependencies": {
