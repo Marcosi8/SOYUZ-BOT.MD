@@ -64,8 +64,8 @@ _Use /song para ouvir a música diretamente no WhatsApp!_
 }
 
 }
-handler.help = ['play']
+handler.help = ['song']
 handler.tags = ['prime', 'dl']
-handler.command = ['musica', 'play', 'mp3', 'playmp3']
+handler.command = ['musica', 'play2', 'song', 'playmp3']
 
 export default handler
