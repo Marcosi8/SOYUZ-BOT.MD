@@ -69,8 +69,8 @@
 $ pkg upgrade -y && pkg update -y
 $ pkg install git -y $ pkg install nodejs -y $ pkg install ffmpeg -y
 $ pkg install imagemagick -y
-$ git clone https://github.com/FG98F/senna-bot
-$ cd senna-bot
+$ git clone https://github.com/Marcosi8/SOYUZ-BOT.MD
+$ cd SOYUZ-BOT.MD
 $ npm i
 $ npm start
 ```
