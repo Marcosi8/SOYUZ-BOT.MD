@@ -33,7 +33,7 @@
 ---
 
 ## Sumário
-- [Clique Aqui Para Dúvidas ⛔️](Dúvidas)
+- [Clique Aqui Para Dúvidas ⛔️](#Dúvidas)
 - [Mudar o número do dono aqui](https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js)
 - [Instalar em Termux](#implante-no-railway)
 - [Implante no Replit](#implante-no-replit)
