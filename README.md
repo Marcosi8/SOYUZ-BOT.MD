@@ -84,13 +84,13 @@ $ npm start
 
 ## Implante no Replit
 
-[![Execute no Repl.it](https://repl.it/badge/github/FG98F/senna-bot)](https://repl.it/github/FG98F/senna-bot)
+[![Execute no Repl.it](https://repl.it/badge/github/Marcosi8/SOYUZ-BOT.MD)](https://repl.it/github/Marcosi8/SOYUZ-BOT.MD)
 
 ---
 
 ## Implante no Heroku
 
-[Implante no Heroku](https://heroku.deploy.queenanya.work.gd/)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Marcosi8/SOYUZ-BOT.MD)
 
 ---
 
