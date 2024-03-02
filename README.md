@@ -2,26 +2,26 @@
     <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png">
 </p>
 
-<h1 align="center">Senna Bot - WhatsApp Bot 🤖</h1>
+<h1 align="center">Soyuz - WhatsApp Bot MultiDispositivo 🚀</h1>
 
 <p align="center">
-  <a href="https://github.com/FG98F"><img src="https://img.shields.io/badge/Senna%20Bot-Preto?style=for-the-badge&logo=whatsApp"></a>
+  <a href="https://github.com/Marcosi8"><img src="https://img.shields.io/badge/Senna%20Bot-Preto?style=for-the-badge&logo=whatsApp"></a>
 </p>
 
 <p align="center">
-    <a href="#"><img title="Senna Bot" src="https://img.shields.io/badge/WhatsApp%20BOT-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
+    <a href="#"><img title="Soyuz Bot" src="https://img.shields.io/badge/WhatsApp%20BOT-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
 </p>
 
 <p align="center">
-    <a href="https://github.com/FG98F"><img title="Autor" src="https://img.shields.io/badge/AUTHOR-FG98F-green.svg?style=for-the-badge&logo=github"></a>
+    <a href="https://github.com/Marcosi8"><img title="Autor" src="https://img.shields.io/badge/AUTHOR-Marcosi8-green.svg?style=for-the-badge&logo=github"></a>
 </p>
 
 <p align="center">
-    Um bot multifuncional para WhatsApp, capaz de oferecer uma ampla variedade de recursos e personalizações para os usuários. Experimente agora e veja o que o Senna Bot pode fazer por você!
+    SoyuzBOT é um bot de WhatsApp multi-device recheado de comandos. Disponível em vários idiomas, mas com português brasileiro como idioma principal!
 </p>
 
 <p align="center">
-    <img src="https://i.ibb.co/fqDHJt8/text.giff&ct=ghy.gif&ct=g" />
+    <img src="https://s9.gifyu.com/images/SFnhA.gif" />
 </p>
 
 ---
@@ -32,25 +32,25 @@
 
 ---
 
-## Table of Contents
-- [Clique Aqui Para Ajuda ⛩️](#clique-aqui-para-ajuda-%EF%B8%8F)
-- [Escanear QR Aqui](#escanear-qr-aqui)
-- [Implante no Railway](#implante-no-railway)
+## Sumário
+- [Clique Aqui Para Dúvidas ⛔️](#clique-aqui-para-ajuda-%EF%B8%8F)
+- [Mudar o número do dono aqui](#escanear-qr-aqui)
+- [Instalar em Termux](#implante-no-railway)
 - [Implante no Replit](#implante-no-replit)
 - [Implante no Heroku](#implante-no-heroku)
 - [Termos e Condições](#termos-e-condições)
-- [Agradecimentos ✨](#agradecimentos-)
+- [Agradecimentos](#agradecimentos-)
 
 ---
 
-## Clique Aqui Para Ajuda ⛩️
+## Clique Aqui Para Dúvidas ⛔️
 
-- [Entre em contato comigo no WhatsApp Messenger 🎐](https://wa.me/SEUNUMERO?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20o%20Senna%20Bot)
-- Meu e-mail: [SEUEMAIL@gmail.com](mailto:SEUEMAIL@gmail.com) 🎐
+- [Entre em contato comigo no WhatsApp](https://wa.me/558881647724?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20o%20Soyuz%20Bot)
+- Meu e-mail: [marcosrian494@gmail.com](mailto:marcosrian494@gmail.com) 
 
 ---
 
-## Escanear QR Aqui
+## Mudar o número do dono aqui
 
 <a href="https://LINKDOQR"><img src="LINKDAIMAGEMDOQR" align="center" width="90" /> </a>
 
@@ -64,7 +64,10 @@
 1. Abra o aplicativo Termux no seu dispositivo Android.
 
 2. Execute os seguintes comandos:
-```markdown
+
+Certifique-se de executar esses comandos em sequência e aguarde até que cada comando seja concluído antes de prosseguir para o próximo.
+
+```
 $ pkg upgrade -y && pkg update -y
 $ pkg install git -y
 $ pkg install nodejs -y
@@ -75,12 +78,11 @@ $ cd senna-bot
 $ npm i 
 $ npm start
 ```
-3. Aguarde até que todos os pacotes e dependências sejam instalados.
+2. Escaneie o Qrcode usando dois celulares.
 
-4. Após a instalação, o bot estará pronto para ser iniciado. Aproveite!
+4. Aguarde até que todos os pacotes e dependências sejam instalados.
 
-Certifique-se de executar esses comandos em sequência e aguarde até que cada comando seja concluído antes de prosseguir para o próximo.
-Escaneie o Qrcode usando dois celulares.
+5. Após a instalação, o bot estará pronto para ser iniciado. Aproveite!
 
 
 ---
@@ -98,13 +100,14 @@ Escaneie o Qrcode usando dois celulares.
 ---
 
 ## Termos e Condições
-1. Este repositório não está à venda ou para troca.
+1. Fork
 2. Não se esqueça de dar a este repositório uma estrela ⭐️.
-3. Este script não é feito para fins ilegais.
-4. Se você tiver algum problema, [entre em contato comigo](https://wa.me/SEUNUMERO?text=Ol%C3%A1%20*FG98F*%2C%20preciso%20de%20ajuda%20com%20o%20Senna%20Bot) para obter ajuda.
+3. Este script não é feito para fins ilegais. Não temos qualquer ligação com o WhatsApp Oficial.
+4. Se você tiver algum problema, [entre em contato comigo](https://wa.me/558881647724text=Ol%C3%A1%20*FG98F*%2C%20preciso%20de%20ajuda%20com%20o%20Soyuz%20Bot) para obter ajuda.
 
 ---
 
-## Agradecimentos ✨
-- [OldUser](https://github.com/Teamolduser) - ✅ Pela compatibilidade com web e módulos
-- [AdirajShing](https://github.com/adiwajshing/Baileys) - ✅ Por uma grande biblioteca
+## Agradecimentos 
+- [AdirajShing](https://github.com/adiwajshing/Baileys) - Por muitas funções
+- [OldUser](https://github.com/FG98F) - Pela base.
+-
