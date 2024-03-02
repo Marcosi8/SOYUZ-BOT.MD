@@ -1,4 +1,4 @@
-import db from '../lib/database.js' //Configurado para americana latina, importante saber que todos os números que estão aqui serão banidos de seu grupo.
+import db from '../lib/database.js' //Configurado para americana latina, importante entender que todos os números que estão aqui serão banidos de seu grupo caso o antifake esteja ligado.
 let handler = m => m
 handler.before = async function (m, {conn, isAdmin, isBotAdmin} ) {
 const fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net"
