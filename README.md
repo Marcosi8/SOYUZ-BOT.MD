@@ -33,9 +33,9 @@
 ---
 
 ## Sumário
-- [Clique Aqui Para Dúvidas ⛔️](#Dúvidas-)
-- [Mudar o número do dono aqui](https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js)
-- [Instalar em Termux](#implante-no-railway)
+- [Dúvidas ⛔️](#dúvidas-)
+- [Mudar o número do dono aqui](#mudar-o-número-do-dono-aqui)
+- [Instalar em Termux](#instalar-no-termux)
 - [Implante no Replit](#implante-no-replit)
 - [Implante no Heroku](#implante-no-heroku)
 - [Termos e Condições](#termos-e-condições)
@@ -58,32 +58,21 @@
 
 ## Instalar no Termux
 
-
-## Implementação no Termux
+### Implementação no Termux
 
 1. Abra o aplicativo Termux no seu dispositivo Android.
 
 2. Execute os seguintes comandos:
 
-Certifique-se de executar esses comandos em sequência e aguarde até que cada comando seja concluído antes de prosseguir para o próximo.
-
+❗️ Certifique-se de executar esses comandos em sequência e aguarde até que cada comando seja concluído antes de prosseguir para o próximo.
 ```
-$ pkg upgrade -y && pkg update -y
-$ pkg install git -y
-$ pkg install nodejs -y
-$ pkg install ffmpeg -y
-$ pkg install imagemagick -y
-$ git clone https://github.com/FG98F/senna-bot
-$ cd senna-bot
-$ npm i 
-$ npm start
+$ pkg upgrade -y && pkg update -y $ pkg install git -y $ pkg install nodejs -y $ pkg install ffmpeg -y $ pkg install imagemagick -y $ git clone https://github.com/FG98F/senna-bot $ cd senna-bot $ npm i $ npm start
 ```
-2. Escaneie o Qrcode usando dois celulares.
+3. Escaneie o qrcode usando dois celulares.
 
 4. Aguarde até que todos os pacotes e dependências sejam instalados.
 
-5. Após a instalação, o bot estará pronto para ser iniciado. Aproveite!
-
+5. Após a instalação, o bot estará pronto para ser usado. Aproveite!
 
 ---
 
@@ -108,6 +97,5 @@ $ npm start
 ---
 
 ## Agradecimentos 
-- [AdirajShing](https://github.com/adiwajshing/Baileys) - Por muitas funções
-- [OldUser](https://github.com/FG98F) - Pela base.
--
+- [Marcosi8] - Por vários comandos
+- [FG98F] - Pela base.
