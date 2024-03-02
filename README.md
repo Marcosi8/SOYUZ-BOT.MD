@@ -2,7 +2,7 @@
     <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png">
 </p>
 
-<h1 align="center">Soyuz - WhatsApp Bot MultiDispositivo 🚀</h1>
+<h1 align="center">WhatsApp Bot Multi-Dispositivo 🚀</h1>
 
 <p align="center">
   <a href="https://github.com/Marcosi8"><img src="https://img.shields.io/badge/Soyuz%20Bot-Preto?style=for-the-badge&logo=whatsApp&color=white"></a>
@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/Marcosi8"><img title="Autor" src="https://img.shields.io/badge/AUTHOR-Marcosi8-green.svg?style=for-the-badge&logo=github"></a>
+    <a href="https://github.com/Marcosi8"><img title="Autor" src="https://img.shields.io/badge/AUTOR-Marcosi8-green.svg?style=for-the-badge&logo=github"></a>
 </p>
 
 <p align="center">
