@@ -35,7 +35,7 @@ try {
      
 	  if(!isLimit) conn.sendFile(m.chat, dl_url, title + '.mp' + (3 + /vid$/.test(command)), `
 > 💿 *MP3*
-_Use /play para ouvir a música diretamente no WhatsApp!_
+_Use /song para ouvir a música diretamente no WhatsApp!_
  
 ▢ *🎞️Qualidade* : ${quality}
 ▢ *⚖️Tamanho* : ${size}
@@ -50,7 +50,7 @@ _Use /play para ouvir a música diretamente no WhatsApp!_
 
      await conn.loadingMsg(m.chat, '📥 baixando', ` ${isLimit ? `≡  *YTDL*\n\n▢ *⚖️${mssg.size}*: ${size}\n▢ *🎞️${mssg.quality}*: ${quality}\n\n▢ _${mssg.limitdl}_ *+${limit} MB*` : '🎉 Download Completo!' }`, ["▬▭▭▭▭▭", "▬▬▭▭▭▭", "▬▬▬▭▭▭", "▬▬▬▬▭▭", "▬▬▬▬▬▭", "▬▬▬▬▬▬"], m)
 	  if(!isLimit) conn.sendFile(m.chat, dl_url, title + '.mp' + (3 + /2$/.test(command)), `
- ≡  *FG YTDL 2*
+ > *YTDL 2*
   
 *📌${mssg.title}* : ${title}
 *🎞️${mssg.quality}* : ${quality}
@@ -64,8 +64,8 @@ _Use /play para ouvir a música diretamente no WhatsApp!_
 }
 
 }
-handler.help = ['play2']
+handler.help = ['play']
 handler.tags = ['prime', 'dl']
-handler.command = ['musica', 'play2', 'mp3', 'playmp3']
+handler.command = ['musica', 'play', 'mp3', 'playmp3']
 
 export default handler
