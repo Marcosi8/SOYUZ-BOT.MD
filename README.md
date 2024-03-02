@@ -5,7 +5,7 @@
 <h1 align="center">Soyuz - WhatsApp Bot MultiDispositivo 🚀</h1>
 
 <p align="center">
-  <a href="https://github.com/Marcosi8"><img src="https://img.shields.io/badge/Senna%20Bot-Preto?style=for-the-badge&logo=whatsApp"></a>
+  <a href="https://github.com/Marcosi8"><img src="https://img.shields.io/badge/Soyuz%20Bot-Preto?style=for-the-badge&logo=whatsApp"></a>
 </p>
 
 <p align="center">
