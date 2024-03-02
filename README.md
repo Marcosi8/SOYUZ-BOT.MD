@@ -38,7 +38,7 @@
 - [Instalar em Termux](#instalar-no-termux)
 - [Implante no Replit](#implante-no-replit)
 - [Implante no Heroku](#implante-no-heroku)
-- [Termos e Condições](#termos-e-condições)
+- [Termos e Condições](#termos-)
 - [Agradecimentos](#agradecimentos-)
 
 ---
@@ -57,8 +57,6 @@
 ---
 
 ## Instalar no Termux
-
-### Implementação no Termux
 
 1. Abra o aplicativo Termux no seu dispositivo Android.
 
@@ -94,7 +92,7 @@ $ npm start
 
 ---
 
-## Termos e Condições
+## Termos
 1. Fork
 2. Não se esqueça de dar a este repositório uma estrela ⭐️.
 3. Este script não é feito para fins ilegais. Não temos qualquer ligação com o WhatsApp Oficial.
