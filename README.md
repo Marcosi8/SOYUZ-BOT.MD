@@ -56,12 +56,7 @@
 
 [Clique aqui para acessar o arquivo config.js](https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js)
 
-> **Muito Importante**: Antes de fazer alterações no número do proprietário, certifique-se de bifurcar este repositório clicando no botão acima. Isso permitirá que você faça alterações, pois irá criar um fork totalmente seu. em seguida, alterar "config.js" em seu fork. Crie também uma API rest própria em: https://api.fgmods.xyz
-> 
-> Após gerar sua API, adicionar na linha: ```global.APIKeys = { // APIKey Here
-  // 'https://website': 'apikey'
-  'https://api.fgmods.xyz': 'SUA-API' //--- 100 de límite diario --- Registro na API para comandos NSFW```
-
+> **Muito Importante**: Antes de fazer alterações no número do proprietário, certifique-se de bifurcar este repositório clicando no botão acima. Isso permitirá que você faça alterações, pois irá criar um fork totalmente seu. em seguida, alterar "config.js" em seu fork. 
 ---
 
 ## Instalar no Termux
