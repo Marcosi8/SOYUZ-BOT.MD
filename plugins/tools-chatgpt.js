@@ -16,7 +16,7 @@ m.react('💬')
 
 }
 handler.help = ['ia <text>']; 
-handler.tags = ['tools', 'ai'];
+handler.tags = ['tools', 'ia'];
 handler.command = ['ia', 'ai', 'chatgpt2', 'openai', 'gpt2'];
 
 export default handler;
