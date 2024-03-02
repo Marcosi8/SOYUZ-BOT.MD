@@ -56,7 +56,7 @@
 
 [Clique aqui para acessar o arquivo config.js](https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js)
 
-> **Muito Importante**: Antes de fazer alterações no número do proprietário, certifique-se de bifurcar este repositório clicando no botão acima. Isso permitirá que você faça alterações, pois irá criar um fork totalmente seu.
+> **Muito Importante**: Antes de fazer alterações no número do proprietário, certifique-se de bifurcar este repositório clicando no botão acima. Isso permitirá que você faça alterações, pois irá criar um fork totalmente seu. em seguida, alterar "config.js" em seu fork.
 ---
 
 ## Instalar no Termux
@@ -70,7 +70,7 @@
 $ pkg upgrade -y && pkg update -y
 $ pkg install git -y $ pkg install nodejs -y $ pkg install ffmpeg -y
 $ pkg install imagemagick -y
-$ git clone https://github.com/Marcosi8/SOYUZ-BOT.MD
+$ git clone https://github.com/<link do seu repositório>
 $ cd SOYUZ-BOT.MD
 $ npm i
 $ npm start
