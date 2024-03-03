@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import flagsData from './src/flags.json';
+import flagsData from './flags.json';
 
 let handler = async (m, { conn, flagsGame, usedPrefix, command }) => {
     let te = `
