@@ -23,9 +23,9 @@ let handler = async (m, { conn }) => {
         let muptime = clockString(tempoAtivo);
 
         // Horário do servidor
-        let serverTime = `💻 \`\`Servidor :\`\`\n*[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]*\n*${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}*`;
+        let serverTime = `💻 \`\`\`Servidor :\`\`\`\n*[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]*\n*${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}*`;
 
-        m.reply(`\`\`Velocidade : ${latensi.toFixed(4)} ms\`\`\n\`\`Uptime : ${muptime}\`\`\n\n${serverTime}`);
+        m.reply(`\`\`\`Velocidade : ${latensi.toFixed(4)} ms\`\`\`\n\`\`\`Uptime : ${muptime}\`\`\`\n\n${serverTime}`);
         m.react('🏓')
     });
 }
@@ -42,4 +42,4 @@ function clockString(ms) {
     let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60;
     let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60;
     return [d, 'd ', h, 'h ', m, 'm ', s, 's '].map(v => v.toString().padStart(2, 0)).join('');
-}
+    }
