@@ -32,8 +32,8 @@ https://chat.whatsapp.com/G7MP2jGbrq4Anl4ag81DtD
 • https://www.youtube.com`)
 
 }
-handler.help = ['support']
+handler.help = ['ajuda']
 handler.tags = ['main']
-handler.command = ['grupos', 'suporte', 'support'] 
+handler.command = ['ajuda', 'suporte', 'support'] 
 
 export default handler
