@@ -10,7 +10,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     
     conn.flagsGame = conn.flagsGame || {};
     
-    if (m.text) return conn.reply(m.chat, te, m);
+    if (m.text && !m.text.startsWith(usedPrefix+command)) return; // Ignorar mensagens que não são comandos
     
     if (id in conn.flagsGame) {
         return conn.reply(m.chat, `⚠️ O jogo de bandeiras já está em andamento!`, conn.flagsGame[id][0]);
@@ -23,7 +23,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     ];
 };
 
-handler.all = async (m, { conn }) => {
+handler.all = async (m, { conn, usedPrefix, command }) => {
     let id = m.chat;
     if (!(id in conn.flagsGame)) return;
     let answer = m.text.trim().toLowerCase();
