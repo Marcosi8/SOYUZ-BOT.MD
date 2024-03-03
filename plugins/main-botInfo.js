@@ -49,24 +49,24 @@ let infobt = `
 *INFO BOT*
   
 > *STADO*
-▢ *GRUPOS* *${groupsIn.length}*
-▢ *GRUPOS EM QUE ESTOU* *${groupsIn.length}*
-▢ *GRUPOS ABANDONADOS* *${groupsIn.length - groupsIn.length}* 
-▢ *PRIVADOS* *${chats.length - groupsIn.length}*
-▢ *CHATS TOTAIS* *${chats.length}*
+▢ *GRUPOS;* *${groupsIn.length}*
+▢ *GRUPOS EM QUE ESTOU:* *${groupsIn.length}*
+▢ *GRUPOS ABANDONADOS:* *${groupsIn.length - groupsIn.length}* 
+▢ *PRIVADOS:* *${chats.length - groupsIn.length}*
+▢ *CHATS TOTAIS:* *${chats.length}*
 
 > *OWNER🧑‍💻*
- _Marcoskz__
-▢ https://wa.me/558881647724
+ *Marcoskz_*
+> https://wa.me/558881647724
   
-▢ GRUPO OFICIAL.
+> GRUPO OFICIAL.
   https://chat.whatsapp.com/LPddZ7u0v8G3PxEQ1SR1mZ
 
 > *S E R V E R*
 *🛑 RAM:* ${format(totalmem() - freemem())} / ${format(totalmem())}
 *🔵 RAM-Livre:* ${format(freemem())}
 
-> *NodeJS memory *
+> *NodeJS memory*
 ${'```' + Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v => v.length)), ' ')}: ${format(used[key])}`).join('\n') + '```'}
 `
 conn.sendFile(m.chat, pp, 'prefil.jpg', infobt, m, false, { mentions: [who] })
