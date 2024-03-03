@@ -23,9 +23,9 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     ];
 };
 
-handler.all = async (m, { conn, command }) => {
+handler.all = async (m, { conn }) => {
     let id = m.chat;
-    if (!conn.flagsGame || !(id in conn.flagsGame)) return;
+    if (!(id in conn.flagsGame)) return;
     let answer = m.text.trim().toLowerCase();
     let correctAnswer = conn.flagsGame[id][1];
     if (answer !== correctAnswer) return conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente.`, conn.flagsGame[id][0]);
@@ -38,15 +38,12 @@ handler.tags = ['game'];
 handler.command = ['bandeira', 'adivinha', 'guess'];
 
 async function getFlag() {
-    let data, randomCountryCode, flagUrl, correctAnswer;
-    do {
-        const response = await fetch('https://flagcdn.com/pt/codes.json');
-        data = await response.json();
-        const countries = Object.keys(data);
-        randomCountryCode = countries[Math.floor(Math.random() * countries.length)];
-        flagUrl = `https://flagcdn.com/w320/${randomCountryCode.toLowerCase()}.png`;
-        correctAnswer = data[randomCountryCode]?.name?.toLowerCase();
-    } while (!correctAnswer);
+    const response = await fetch('https://flagcdn.com/pt/codes.json');
+    const data = await response.json();
+    const countries = Object.keys(data);
+    const randomCountryCode = countries[Math.floor(Math.random() * countries.length)];
+    const flagUrl = `https://flagcdn.com/w320/${randomCountryCode.toLowerCase()}.png`;
+    const correctAnswer = data[randomCountryCode].name;
     return { flagUrl, correctAnswer };
 }
 
