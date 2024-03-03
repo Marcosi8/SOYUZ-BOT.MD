@@ -23,7 +23,7 @@ let handler = async (m, { conn }) => {
         let muptime = clockString(tempoAtivo);
 
         // Horário do servidor
-        let serverTime = `💻 *Servidor:*\n*[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]*\n*${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}*`;
+        let serverTime = `💻 `\`\`Servidor:`\`\`\n*[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]*\n*${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}*`;
 
         m.reply(`*${mssg.ping}* : ${latensi.toFixed(4)} _ms_\n*Uptime* ${muptime}\n\n${serverTime}`);
         m.react('🏓')
