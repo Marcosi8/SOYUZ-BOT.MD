@@ -1,9 +1,9 @@
 
 let handler = async (m, { conn, usedPrefix, command }) => {
 	
-if (!m.mentionedJid[0] && !m.quoted) return m.reply(`✳️ ${mssg.useCmd}\n\n*${usedPrefix + command}* @tag`) 
+if (!m.mentionedJid[0] && !m.quoted) return m.reply(`❗️ ${mssg.useCmd}\n\n*${usedPrefix + command}* @user`) 
 let user = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted.sender
-if (conn.user.jid.includes(user)) return m.reply(`✳️ No puedo hacer un auto kick`)
+if (conn.user.jid.includes(user)) return m.reply(`🤔 *Como vou banir a mim mesmo?*`)
 
 await conn.groupParticipantsUpdate(m.chat, [user], 'remove')
 m.reply(`✅ ${mssg.kick}`) 
