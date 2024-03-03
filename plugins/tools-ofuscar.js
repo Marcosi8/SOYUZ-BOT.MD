@@ -9,7 +9,7 @@ let obfuscatedCode = await obfuscateCode(text);
 conn.sendMessage(m.chat, {text: obfuscatedCode}, {quoted: m});
 }
 
-handler.help = ['criptografar']
+handler.help = ['cripto']
 handler.tag = ['prime', 'main']
 handler.command = ['criptografar', 'cripto']
 export default handler
