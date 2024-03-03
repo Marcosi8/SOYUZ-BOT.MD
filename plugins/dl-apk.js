@@ -3,6 +3,7 @@ import * as aptoideScraper from 'aptoide-scraper';
 let handler = async (m, { conn, usedPrefix: prefix, command, text }) => {
   try {
     if (['modapk', 'apk', 'app'].includes(command)) { // Verificando se o comando está na lista de comandos
+      if (!text) text = m.text.split(' ')[1]; // Capturando o texto após o comando
       if (!text) throw `*[❗] Forneça o nome do APK que você deseja baixar!*`;
       m.react(rwait);
       await conn.reply(m.chat, global.wait, m);
