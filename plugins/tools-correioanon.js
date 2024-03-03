@@ -6,7 +6,7 @@ async function handler(m, { usedPrefix, command }) {
         case 'sair': {
             let room = Object.values(this.anonymous).find(room => room.check(m.sender))
             if (!room) return this.sendMessage(m.chat, { text: "[❗️] _*Você não está em um chat anônimo.*_"}, { quoted: m })
-            m.reply("Você saiu do chat anônimo.")
+            m.reply("🚪 _*Você saiu do chat anônimo*_")
             let other = room.other(m.sender) 
             if (other) await this.sendMessage(other, { text: "[❗️] *_Seu parceiro saiu do chat._*"}, { quoted: m })
         if (command === 'leave') break
