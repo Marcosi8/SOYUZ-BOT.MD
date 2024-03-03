@@ -23,7 +23,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 
 handler.all = async (m, { conn }) => {
     let id = m.chat;
-    if (!(id in conn.flagsGame)) return;
+    if (!conn.flagsGame || !(id in conn.flagsGame)) return;
     let answer = m.text.trim();
     let correctAnswer = conn.flagsGame[id][1];
     if (answer.toLowerCase() !== correctAnswer) return conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente.`, conn.flagsGame[id][0]);
