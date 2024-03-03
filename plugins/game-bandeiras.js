@@ -19,16 +19,17 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     let { flagUrl, correctAnswer } = await getFlag();
     conn.flagsGame[id] = [
         await conn.sendFile(m.chat, flagUrl, 'flag.png', `🚩 Qual é o país desta bandeira?`, m),
-        correctAnswer.toLowerCase()
+        correctAnswer
     ];
 };
 
-handler.all = async (m, { conn, usedPrefix, command }) => {
+handler.all = async (m, { conn }) => {
     let id = m.chat;
     if (!(id in conn.flagsGame)) return;
-    let answer = m.text.trim().toLowerCase();
+    let answer = m.text.trim();
     let correctAnswer = conn.flagsGame[id][1];
-    if (answer !== correctAnswer) return conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente.`, conn.flagsGame[id][0]);
+    if (!correctAnswer) return; // Se o nome do país não foi obtido corretamente, ignorar
+    if (answer.toLowerCase() !== correctAnswer.toLowerCase()) return conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente.`, conn.flagsGame[id][0]);
     conn.reply(m.chat, `✅ Parabéns! Você acertou. O país da bandeira é *${correctAnswer}* 🎉`, conn.flagsGame[id][0]);
     delete conn.flagsGame[id];
 };
@@ -43,7 +44,7 @@ async function getFlag() {
     const countries = Object.keys(data);
     const randomCountryCode = countries[Math.floor(Math.random() * countries.length)];
     const flagUrl = `https://flagcdn.com/w320/${randomCountryCode.toLowerCase()}.png`;
-    const correctAnswer = data[randomCountryCode].name;
+    const correctAnswer = data[randomCountryCode]?.name;
     return { flagUrl, correctAnswer };
 }
 
