@@ -6,7 +6,7 @@ import { readdirSync, unlinkSync, rmSync } from 'fs'
 
 let handler = async (m, { conn, __dirname, args }) => {
 
-  m.reply(`✅ Se limpio la carpeta *tmp + sessions*`)
+  m.reply(`✅ Pastas limpas *tmp + sessions*`)
   m.react(done);
   // -- eliminar archivos temporales ---
   const tmpDirs = [tmpdir(), join(__dirname, '../tmp')]
