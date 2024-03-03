@@ -46,4 +46,4 @@ async function getFlag() {
     return { flagUrl, countryCode: randomCountryCode, countryName };
 }
 
-export { handler, handleAll };
+export { handler };
