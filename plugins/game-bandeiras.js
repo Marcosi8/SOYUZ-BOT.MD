@@ -36,12 +36,15 @@ handler.tags = ['game'];
 handler.command = ['bandeira', 'adivinha', 'guess'];
 
 async function getFlag() {
-    const response = await fetch('https://flagcdn.com/pt/codes.json');
-    const data = await response.json();
-    const countries = Object.keys(data);
-    const randomCountryCode = countries[Math.floor(Math.random() * countries.length)];
-    const flagUrl = `https://flagcdn.com/w320/${randomCountryCode.toLowerCase()}.png`;
-    const correctAnswer = data[randomCountryCode].name.toLowerCase();
+    let data, randomCountryCode, flagUrl, correctAnswer;
+    do {
+        const response = await fetch('https://flagcdn.com/pt/codes.json');
+        data = await response.json();
+        const countries = Object.keys(data);
+        randomCountryCode = countries[Math.floor(Math.random() * countries.length)];
+        flagUrl = `https://flagcdn.com/w320/${randomCountryCode.toLowerCase()}.png`;
+        correctAnswer = data[randomCountryCode]?.name?.toLowerCase();
+    } while (!correctAnswer);
     return { countryCode: randomCountryCode, flagUrl, correctAnswer };
 }
 
