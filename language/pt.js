@@ -23,11 +23,11 @@ const translations = {
     hi: 'Olá',
     gp: 'Grupo',
     nobbot: 'Este comando só pode ser usado no bot principal',
-    botqr: '*Escaneie este QR para se tornar um Sub Bot*\n\n1. Clique nos três pontos no canto superior direito.\n2. Toque em "Dispositivos vinculados"\n3. Escaneie este QR',
+    botqr: '*Escaneie este QR para se tornar um Sub Bot*\n\n1. Clique nos três pontos no canto superior direito.\n2. Toque em "Dispositivos Conectados"\n3. Escaneie este QR',
     recon: 'Conexão perdida...',
     sesClose: 'A conexão foi encerrada. Você precisará se reconectar manualmente enviando o *ID*',
     connet: 'Conectado com sucesso',
-    connID: '*Conectado com sucesso!*\n\nEm alguns segundos, enviaremos o *Id* que você deve usar para se reconectar\n\n*NOTA:* Saia do grupo *DyLux  ┃ ᴮᴼᵀ*\nGuarde este link para que você possa entrar novamente depois\nhttps://instabio.cc/fg98ff',
+    connID: '*Conectado com sucesso!*\n\nEm alguns segundos, enviaremos o *ID* que você deve usar para se reconectar\n\n*NOTA:* Saia do grupo *Soyuz*\nGuarde este link para que você possa entrar novamente depois:\nhttps://chat.whatsapp.com/LPddZ7u0v8G3PxEQ1SR1mZ',
     connMsg: 'Da próxima vez que você se conectar, envie a seguinte mensagem para fazer login sem escanear outro código *QR*',
     botlist: 'Lista de Sub Bots Ativos',
     newcode: (usedPrefix) => `Ótimo! Agora você pode usar *${usedPrefix}botclone* para solicitar um novo código QR`,
@@ -263,7 +263,7 @@ const translations = {
   groupH: 'Este comando só pode ser usado em grupos',
   privateH: 'Este comando só pode ser usado no *chat privado com o Bot*',
   adminH: 'Este comando é apenas para *administradores* do grupo',
-  botAdmin: '*Para usar este comando, você deve tornar o bot *administrador* do grupo!*',
+  botAdmin: '*Para usar este comando, você deve tornar o bot *ADMINISTRADOR* do grupo!*',
   unregH: 'Registre-se para usar esta função. Digite:\n\n*/reg*',
   ig: `▢ Siga-me no Instagram\n${fgig}`
 }
