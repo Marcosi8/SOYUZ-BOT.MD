@@ -1,6 +1,46 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-const flagsGame = {};
+let handler = async (m, { conn, usedPrefix, command }) => {
+    let te = `
+🌍 *Adivinhe a Bandeira do País:* 
+    
+*📌 Exemplo de Uso:* _${usedPrefix+command}_
+`
+    let id = m.chat;
+    
+    conn.flagsGame = conn.flagsGame || {};
+    
+    if (m.text && !m.text.startsWith(usedPrefix+command)) return; // Ignorar mensagens que não são comandos
+    
+    if (id in conn.flagsGame) {
+        return conn.reply(m.chat, `⚠️ O jogo de bandeiras já está em andamento!`, conn.flagsGame[id][0]);
+    }
+    
+    let { flagUrl, countryCode, countryName } = await getFlag();
+    conn.flagsGame[id] = [
+        await conn.sendFile(m.chat, flagUrl, 'flag.png', `🚩 Qual é o país desta bandeira?`, m),
+        countryName
+    ];
+};
+
+handler.all = async (m, { conn }) => {
+    let id = m.chat;
+    conn.flagsGame = conn.flagsGame || {}; // Certificar-se de que flagsGame esteja inicializado
+    if (!(id in conn.flagsGame)) return;
+    let answer = m.text.trim();
+    let correctAnswer = conn.flagsGame[id][1];
+    if (!correctAnswer) return conn.reply(m.chat, `❌ Houve um erro interno. Tente novamente mais tarde.`, conn.flagsGame[id][0]);
+    if (answer === correctAnswer) {
+        conn.reply(m.chat, `✅ Parabéns! Você acertou. O país da bandeira é *${correctAnswer}* 🎉`, conn.flagsGame[id][0]);
+    } else {
+        conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente.`, conn.flagsGame[id][0]);
+    }
+    delete conn.flagsGame[id];
+};
+
+handler.help = ['bandeira'];
+handler.tags = ['game'];
+handler.command = ['bandeira', 'adivinha', 'guess'];
 
 async function getFlag() {
     const response = await fetch('https://flagcdn.com/pt/codes.json');
@@ -12,45 +52,4 @@ async function getFlag() {
     return { flagUrl, countryCode: randomCountryCode, countryName };
 }
 
-async function handle(message, conn, usedPrefix, command) {
-    let id = message.chatId || message.from;
-    
-    if (message.body && !message.body.startsWith(usedPrefix + command)) return;
-    
-    if (id in flagsGame) {
-        await conn.reply(message.chatId, `⚠️ O jogo de bandeiras já está em andamento!`, message.id);
-        return;
-    }
-    
-    let { flagUrl, countryName } = await getFlag();
-    flagsGame[id] = [await conn.sendFile(message.chatId, flagUrl, 'flag.png', `🚩 Qual é o país desta bandeira?`), countryName];
-}
-
-async function handleAnswer(message, conn) {
-    let id = message.chatId || message.from;
-    
-    if (!(id in flagsGame)) return;
-    let answer = message.body.trim();
-    let correctAnswer = flagsGame[id][1];
-    
-    if (!correctAnswer) {
-        await conn.reply(message.chatId, `❌ Houve um erro interno. Tente novamente mais tarde.`, flagsGame[id][0]);
-        return;
-    }
-    
-    if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-        await conn.reply(message.chatId, `✅ Parabéns! Você acertou. O país da bandeira é *${correctAnswer}* 🎉`, flagsGame[id][0]);
-    } else {
-        await conn.reply(message.chatId, `❌ Resposta incorreta! Tente novamente.`, flagsGame[id][0]);
-    }
-    
-    delete flagsGame[id];
-}
-
-module.exports = { 
-    handle, 
-    handleAnswer, 
-    command: ['bandeira', 'adivinha', 'guess'], 
-    tags: ['game'], 
-    help: ['bandeira'] 
-};
+export default handler;
