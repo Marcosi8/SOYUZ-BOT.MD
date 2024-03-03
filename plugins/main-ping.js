@@ -23,15 +23,15 @@ let handler = async (m, { conn }) => {
         let muptime = clockString(tempoAtivo);
 
         // Horário do servidor
-        let serverTime = `💻 *Horário do servidor*\n*[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]*\n*${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}*`;
+        let serverTime = `💻 *Servidor:*\n*[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]*\n*${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}*`;
 
-        m.reply(`🏓 *${mssg.ping}* : ${latensi.toFixed(4)} _ms_\nTempo Ativo: ${muptime}\n\n${serverTime}`);
+        m.reply(`🏓 *${mssg.ping}* : ${latensi.toFixed(4)} _ms_\n🚀 *Tempo Ativo:* ${muptime}\n\n${serverTime}`);
     });
 }
 
 handler.help = ['ping']
 handler.tags = ['main']
-handler.command = ['ping', 'speed']
+handler.command = ['ping', 'speed', 'teste']
 
 export default handler;
 
