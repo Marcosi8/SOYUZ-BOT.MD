@@ -19,7 +19,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     let { flagUrl, countryCode, countryName } = await getFlag();
     conn.flagsGame[id] = [
         await conn.sendFile(m.chat, flagUrl, 'flag.png', `🚩 Qual é o país desta bandeira?`, m),
-        countryName.toLowerCase()
+        countryName
     ];
 };
 
@@ -29,7 +29,8 @@ handler.all = async (m, { conn }) => {
     if (!(id in conn.flagsGame)) return;
     let answer = m.text.trim();
     let correctAnswer = conn.flagsGame[id][1];
-    if (answer.toLowerCase() === correctAnswer) {
+    if (!correctAnswer) return conn.reply(m.chat, `❌ Houve um erro interno. Tente novamente mais tarde.`, conn.flagsGame[id][0]);
+    if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
         conn.reply(m.chat, `✅ Parabéns! Você acertou. O país da bandeira é *${correctAnswer}* 🎉`, conn.flagsGame[id][0]);
     } else {
         conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente.`, conn.flagsGame[id][0]);
