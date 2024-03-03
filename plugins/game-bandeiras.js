@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import flagsData from './src/flags.json';
 
 let handler = async (m, { conn, flagsGame, usedPrefix, command }) => {
     let te = `
@@ -23,7 +24,7 @@ let handler = async (m, { conn, flagsGame, usedPrefix, command }) => {
     ];
 };
 
-handler.all = async (m, { flagsGame }) => {
+handler.all = async (m, { conn, flagsGame, usedPrefix }) => {
     let id = m.chat;
     flagsGame = flagsGame || {}; // Certificar-se de que flagsGame esteja inicializado
     if (!(id in flagsGame)) return;
@@ -31,10 +32,10 @@ handler.all = async (m, { flagsGame }) => {
     let correctAnswer = flagsGame[id][1];
     if (!correctAnswer) return conn.reply(m.chat, `❌ Houve um erro interno. Tente novamente mais tarde.`);
     if (m.text && id in flagsGame) {
-        if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
+        if (answer.toLowerCase() === flagsData[correctAnswer.toLowerCase()].toLowerCase()) {
             conn.reply(m.chat, `✅ Parabéns! Você acertou. O país da bandeira é *${correctAnswer}* 🎉`);
         } else {
-            conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente.`);
+            conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente. Dica: use ${usedPrefix+command} para tentar novamente.`);
         }
         delete flagsGame[id];
     }
