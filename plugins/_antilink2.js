@@ -17,7 +17,7 @@ export async function before(m, { conn, isAdmin, isBotAdmin }) {
     if (chat.antiLink2 && isLink && !isAdmin) {
         await conn.reply(m.chat, `> *[❗️] LINK DETECTED 🔗*
             
-*We do not allow unknown links in our group.*\n\n_Não permitimos links desconhecidos em nosso grupo,_ @${m.sender.split('@')[0]}.\n\n ⚠️ *Antilink2 ativo, não é passível de banimento. Ative o antilink para banir.* ${isBotAdmin ? '' : '\n\n⚠️ *Eu não sou um administrador do grupo, então eu não posso excluir o link!*'}`, null, { mentions: [m.sender] });
+_*We do not allow unknown links in our group.*_\n\n_Não permitimos links desconhecidos em nosso grupo,_ @${m.sender.split('@')[0]}.\n\n ⚠️ *Por favor, observe que o Antilink2 está ativo e não resulta em banimento. Ative o Antilink1 para banir.* ${isBotAdmin ? '' : '\n\n🚫 *Por favor, considere tornar este bot um administrador do grupo para que o link possa ser excluído!*'}`, null, { mentions: [m.sender] });
         await conn.sendMessage(m.chat, { delete: m.key });
         return !1;
     }
