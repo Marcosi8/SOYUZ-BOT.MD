@@ -25,6 +25,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 
 handler.all = async (m, { conn }) => {
     let id = m.chat;
+    conn.flagsGame = conn.flagsGame || {}; // Certificar-se de que flagsGame esteja inicializado
     if (!(id in conn.flagsGame)) return;
     let answer = m.text.trim();
     let correctAnswer = conn.flagsGame[id][1];
