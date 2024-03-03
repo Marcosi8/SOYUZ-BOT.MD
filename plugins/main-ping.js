@@ -21,7 +21,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
         }
         let muptime = clockString(tempoAtivo);
 
-        m.reply(`🏓 *${mssg.ping}* : ${latensi.toFixed(4)} _ms_\nTempo Ativo: ${muptime}`);
+        m.reply(`🏓 *${mssg.ping}* : ${latensi.toFixed(4)} _ms_\n🚀 *Tempo Ativo:* ${muptime}`);
     });
 }
 
