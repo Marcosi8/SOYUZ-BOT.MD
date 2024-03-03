@@ -10,5 +10,5 @@ conn.sendMessage(m.chat, {text: obfuscatedCode}, {quoted: m});
 }
 handler.help = ['criptografar']
 handler.tag = ['prime', 'main']
-handler.command = /^(cripto|criptografar)$/i
+handler.command = ['criptografar', 'cripto']
 export default handler
