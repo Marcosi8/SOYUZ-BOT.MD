@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-let handler = async (m, { flagsGame, usedPrefix, command }) => {
+let handler = async (m, { conn, flagsGame, usedPrefix, command }) => {
     let te = `
 🌍 *Adivinhe a Bandeira do País:* 
     
@@ -13,12 +13,12 @@ let handler = async (m, { flagsGame, usedPrefix, command }) => {
     if (m.text && !m.text.startsWith(usedPrefix+command)) return; // Ignorar mensagens que não são comandos
     
     if (id in flagsGame) {
-        return m.reply(`⚠️ O jogo de bandeiras já está em andamento!`);
+        return conn.reply(m.chat, `⚠️ O jogo de bandeiras já está em andamento!`);
     }
     
     let { flagUrl, countryCode, countryName } = await getFlag();
     flagsGame[id] = [
-        await m.sendFile(flagUrl, 'flag.png', `🚩 Qual é o país desta bandeira?`),
+        await conn.sendFile(m.chat, flagUrl, 'flag.png', `🚩 Qual é o país desta bandeira?`),
         countryName
     ];
 };
@@ -29,12 +29,12 @@ handler.all = async (m, { flagsGame }) => {
     if (!(id in flagsGame)) return;
     let answer = m.text.trim();
     let correctAnswer = flagsGame[id][1];
-    if (!correctAnswer) return m.reply(`❌ Houve um erro interno. Tente novamente mais tarde.`);
+    if (!correctAnswer) return conn.reply(m.chat, `❌ Houve um erro interno. Tente novamente mais tarde.`);
     if (m.text && id in flagsGame) {
         if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-            m.reply(`✅ Parabéns! Você acertou. O país da bandeira é *${correctAnswer}* 🎉`);
+            conn.reply(m.chat, `✅ Parabéns! Você acertou. O país da bandeira é *${correctAnswer}* 🎉`);
         } else {
-            m.reply(`❌ Resposta incorreta! Tente novamente.`);
+            conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente.`);
         }
         delete flagsGame[id];
     }
