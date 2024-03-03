@@ -1,10 +1,11 @@
 import speed from 'performance-now';
-import { exec } from 'child_process';
+import { spawn, exec, execSync } from 'child_process';
+import moment from 'moment-timezone';
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-    let start = Date.now(); // Início da execução do comando
+let handler = async (m, { conn }) => {
     let timestamp = speed();
     let latensi = speed() - timestamp;
+    let start = Date.now(); // Início da execução do comando
 
     exec(`neofetch --stdout`, async (error, stdout, stderr) => {
         let child = stdout.toString("utf-8");
@@ -21,7 +22,10 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
         }
         let muptime = clockString(tempoAtivo);
 
-        m.reply(`🏓 *${mssg.ping}* : ${latensi.toFixed(4)} _ms_\n🚀 *Tempo Ativo:* ${muptime}`);
+        // Horário do servidor
+        let serverTime = `💻 *Horário do servidor*\n*[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]*\n*${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}*`;
+
+        m.reply(`🏓 *${mssg.ping}* : ${latensi.toFixed(4)} _ms_\nTempo Ativo: ${muptime}\n\n${serverTime}`);
     });
 }
 
@@ -37,4 +41,4 @@ function clockString(ms) {
     let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60;
     let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60;
     return [d, 'd ', h, 'h ', m, 'm ', s, 's '].map(v => v.toString().padStart(2, 0)).join('');
-                 }
+}
