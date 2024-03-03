@@ -45,9 +45,9 @@ readdirSync(bbtSessions, { withFileTypes: true }).forEach((file) => {
 
 //--
 };
-handler.help = ['cleartmp']
+handler.help = ['limpartmp']
 handler.tags = ['owner']
-handler.command = /^(cleartmp)$/i
+handler.command = /^(limpartmp)$/i
 handler.rowner = true
 
 export default handler
