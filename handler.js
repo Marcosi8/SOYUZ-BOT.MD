@@ -160,7 +160,7 @@ export async function handler(chatUpdate) {
                     sDemote: '',
                     delete: false,
                     antiLink: false,
-                    antiLink2: true,
+                    antiLink2: false,
                     viewonce: false,
                     useDocument: true,
                     captcha: false,
