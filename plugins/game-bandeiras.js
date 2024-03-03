@@ -10,6 +10,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     
     conn.flagsGame = conn.flagsGame || {};
     
+    if (m.text) return conn.reply(m.chat, te, m);
+    
     if (id in conn.flagsGame) {
         return conn.reply(m.chat, `⚠️ O jogo de bandeiras já está em andamento!`, conn.flagsGame[id][0]);
     }
@@ -21,7 +23,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     ];
 };
 
-handler.all = async (m, { conn }) => {
+handler.all = async (m, { conn, command }) => {
     let id = m.chat;
     if (!conn.flagsGame || !(id in conn.flagsGame)) return;
     let answer = m.text.trim().toLowerCase();
