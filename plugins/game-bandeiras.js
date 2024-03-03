@@ -2,13 +2,13 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { conn, usedPrefix, command }) => {
     let te = `
- *Adivinhe a Bandeira do País:* 
+🌍 *Adivinhe a Bandeira do País:* 
     
-* Exemplo de Uso:* _${usedPrefix+command}_
+*📌 Exemplo de Uso:* _${usedPrefix+command}_
 `
     let id = m.chat;
     
-    conn.flagsGame = conn.flagsGame || {}; // Garanta que flagsGame esteja inicializado
+    conn.flagsGame = conn.flagsGame || {};
     
     if (m.text && !m.text.startsWith(usedPrefix+command)) return; // Ignorar mensagens que não são comandos
     
@@ -16,16 +16,11 @@ let handler = async (m, { conn, usedPrefix, command }) => {
         return conn.reply(m.chat, `⚠️ O jogo de bandeiras já está em andamento!`, conn.flagsGame[id][0]);
     }
     
-    try {
-        let { flagUrl, countryCode, countryName } = await getFlag();
-        conn.flagsGame[id] = [
-            await conn.sendFile(m.chat, flagUrl, 'flag.png', ` Qual é o país desta bandeira?`, m),
-            countryName
-        ];
-    } catch (error) {
-        console.error(error);
-        return conn.reply(m.chat, `❌ Houve um erro ao buscar a bandeira. Tente novamente mais tarde.`);
-    }
+    let { flagUrl, countryCode, countryName } = await getFlag();
+    conn.flagsGame[id] = [
+        await conn.sendFile(m.chat, flagUrl, 'flag.png', `🚩 Qual é o país desta bandeira?`, m),
+        countryName
+    ];
 };
 
 handler.all = async (m, { conn }) => {
@@ -36,7 +31,7 @@ handler.all = async (m, { conn }) => {
     let correctAnswer = conn.flagsGame[id][1];
     if (!correctAnswer) return conn.reply(m.chat, `❌ Houve um erro interno. Tente novamente mais tarde.`, conn.flagsGame[id][0]);
     if (answer === correctAnswer) {
-        conn.reply(m.chat, `✅ Parabéns! Você acertou. O país da bandeira é *${correctAnswer}* `, conn.flagsGame[id][0]);
+        conn.reply(m.chat, `✅ Parabéns! Você acertou. O país da bandeira é *${correctAnswer}* 🎉`, conn.flagsGame[id][0]);
     } else {
         conn.reply(m.chat, `❌ Resposta incorreta! Tente novamente.`, conn.flagsGame[id][0]);
     }
