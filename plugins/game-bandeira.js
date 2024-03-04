@@ -28,10 +28,10 @@ let handler = async (m, { conn }) => {
         }
     }
     
-    // Registrando o evento de texto para verificar a resposta do usuário
-    conn.on('chat-update', async (m) => {
-        if (m.chat && m.chat.endsWith('@s.whatsapp.net')) checkAnswer(m)
-    })
+    // Registrando a função de verificação de resposta como um listener de eventos
+    conn.handler = conn.handler ? conn.handler : {}
+    conn.handler.all = conn.handler.all ? conn.handler.all : []
+    conn.handler.all.push(checkAnswer)
 }
 handler.help = ['adivinha']
 handler.tags = ['game']
@@ -42,7 +42,12 @@ let flags = {
     estadosunidos: { name: 'Estados Unidos', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png' },
     canada: { name: 'Canadá', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1280px-Flag_of_Canada_%28Pantone%29.svg.png' },
     india: { name: 'Índia', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/1280px-Flag_of_India.svg.png' },
-    china: { name: 'China', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1280px-Flag_of_the_People%27s_Republic_of_China.svg.png' }
+    china: { name: 'China', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1280px-Flag_of_the_People%27s_Republic_of_China.svg.png' },
+    alemanha: { name: 'Alemanha', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/1280px-Flag_of_Germany.svg.png' },
+    franca: { name: 'França', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/1280px-Flag_of_France.svg.png' },
+    italia: { name: 'Itália', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/1280px-Flag_of_Italy.svg.png' },
+    espanha: { name: 'Espanha', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/1280px-Flag_of_Spain.svg.png' },
+    japon: { name: 'Japão', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png' },
 }
 
 function pickRandomFlag() {
