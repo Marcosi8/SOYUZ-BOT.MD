@@ -1,28 +1,19 @@
 import fetch from 'node-fetch';
-import FormData from 'form-data';
+import fs from 'fs';
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `🤔 *Exemplo:* ${usedPrefix + command} Descreva a imagem que deseja gerar!`;
 
-  const apiKey = 'sua_chave_de_api';
+  const apiKey = 'sk-NbvK4EiYGquxKRLfmdbd3aJQjFR3xNIkLKNbbZCHdek4z4Aj';
 
   await conn.sendMessage(m.chat, { text: '*⌛ ESPERE UM MOMENTO, POR FAVOR...*' }, { quoted: m });
 
   try {
-    const form = new FormData();
-    form.append('prompt', text);
-    form.append('mode', 'search');
-    form.append('search_prompt', 'dog');
-    form.append('output_format', 'webp');
-    form.append('image', fs.createReadStream('./husky-in-a-field.png'));
-
-    const response = await fetch('https://api.stability.ai/v2alpha/generation/stable-image/inpaint', {
-      method: 'POST',
+    const response = await fetch(`https://platform.stability.ai/api/generate-image?text=${encodeURIComponent(text)}`, {
+      method: 'GET',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        ...form.getHeaders()
-      },
-      body: form
+        'Authorization': `Bearer ${apiKey}`
+      }
     });
 
     if (!response.ok) {
@@ -31,8 +22,15 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     const buffer = await response.buffer();
 
+    // Salvar a imagem temporariamente
+    const tempFilePath = 'temp_image.png';
+    fs.writeFileSync(tempFilePath, buffer);
+
     // Enviar a imagem como mensagem de mídia
-    await conn.sendMessage(m.chat, { image: buffer }, { quoted: m });
+    await conn.sendFile(m.chat, tempFilePath, 'image.png', '', m);
+
+    // Remover o arquivo temporário após o envio
+    fs.unlinkSync(tempFilePath);
   } catch (error) {
     console.error('Erro:', error);
     throw `*ERRO*: ${error.message}`;
