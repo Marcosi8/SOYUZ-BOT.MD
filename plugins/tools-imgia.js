@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 const engineId = 'stable-diffusion-v1-6';
 const apiHost = process.env.API_HOST ?? 'https://api.stability.ai';
-const apiKey = 'SUA_CHAVE_DE_API'; // Substitua 'SUA_CHAVE_DE_API' pela sua chave de API
+const apiKey = 'sk-NbvK4EiYGquxKRLfmdbd3aJQjFR3xNIkLKNbbZCHdek4z4Aj'; // Substitua 'SUA_CHAVE_DE_API' pela sua chave de API
 
 const generateImageFromText = async (prompt) => {
   try {
