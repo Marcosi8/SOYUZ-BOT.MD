@@ -23,11 +23,11 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const buffer = await response.buffer();
 
     // Salvar a imagem temporariamente
-    const tempFilePath = 'temp_image.png';
+    const tempFilePath = 'temp_image.tmp';
     fs.writeFileSync(tempFilePath, buffer);
 
     // Enviar a imagem como mensagem de mídia
-    await conn.sendFile(m.chat, tempFilePath, 'image.png', '', m);
+    await conn.sendFile(m.chat, tempFilePath, 'generated_image.png', '', m);
 
     // Remover o arquivo temporário após o envio
     fs.unlinkSync(tempFilePath);
