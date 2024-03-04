@@ -1,6 +1,9 @@
 let handler = async (m, { conn, text }) => {
     conn.flags = conn.flags ? conn.flags : {}
     
+    // Registrar a função checkAnswer como um listener de eventos para mensagens recebidas
+    conn.on('chat-update', checkAnswer)
+    
     let id = m.chat
     if (id in conn.flags) return conn.reply(m.chat, `⚠️ ${mssg.gameOn}`, conn.flags[id][0])
     let flag = pickRandomFlag()
