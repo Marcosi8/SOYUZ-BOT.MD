@@ -4,7 +4,7 @@ import fs from 'fs';
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `🤔 *Exemplo:* ${usedPrefix + command} Descreva a imagem que deseja gerar!`;
 
-  const apiKey = 'sk-NbvK4EiYGquxKRLfmdbd3aJQjFR3xNIkLKNbbZCHdek4z4Aj';
+  const apiKey = 'sua_chave_de_api';
 
   await conn.sendMessage(m.chat, { text: '*⌛ ESPERE UM MOMENTO, POR FAVOR...*' }, { quoted: m });
 
@@ -20,14 +20,13 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       throw new Error(`Erro ao chamar a API: ${response.status} ${response.statusText}`);
     }
 
+    // Salvar a resposta como um arquivo binário
     const buffer = await response.buffer();
-
-    // Salvar a imagem temporariamente
-    const tempFilePath = 'temp_image.tmp';
+    const tempFilePath = 'generated_image.png';
     fs.writeFileSync(tempFilePath, buffer);
 
-    // Enviar a imagem como mensagem de mídia
-    await conn.sendFile(m.chat, tempFilePath, 'generated_image.png', '', m);
+    // Enviar o arquivo como mensagem de mídia
+    await conn.sendFile(m.chat, tempFilePath, 'imagem_gerada.png', '', m);
 
     // Remover o arquivo temporário após o envio
     fs.unlinkSync(tempFilePath);
