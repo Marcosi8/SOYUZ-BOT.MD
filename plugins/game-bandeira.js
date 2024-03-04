@@ -1,13 +1,7 @@
-let handler = async (m, { conn, args, usedPrefix, command }) => {
+let handler = async (m, { conn }) => {
     conn.flags = conn.flags ? conn.flags : {}
     
     let te = `
-🚩 *Jogo de Adivinhação de Bandeiras:* 
-    
-${Object.keys(flags).join(' | ')} 
-  
-*📌 Exemplo de uso:* _${usedPrefix+command}_
-  
 *Adivinhe de qual país é esta bandeira! Digite o nome do país para responder.*`
     
     let id = m.chat
@@ -22,6 +16,19 @@ ${Object.keys(flags).join(' | ')}
         }, 60000) // 60 segundos para adivinhar
     ]
     conn.reply(m.chat, te, m)
+    conn.on('text', async (m) => {
+        if (m.chat == id && conn.flags[id]) {
+            let answer = m.text.toLowerCase()
+            let correctAnswer = conn.flags[id][1].name.toLowerCase()
+            if (answer === correctAnswer) {
+                conn.reply(m.chat, `✅ Parabéns! Você acertou! A bandeira era do ${conn.flags[id][1].name}.`, conn.flags[id][0])
+                clearTimeout(conn.flags[id][2])
+                delete conn.flags[id]
+            } else {
+                conn.reply(m.chat, `❌ Resposta incorreta. Tente novamente!`, conn.flags[id][0])
+            }
+        }
+    })
 }
 handler.help = ['adivinha']
 handler.tags = ['game']
