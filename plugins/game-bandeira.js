@@ -1,6 +1,22 @@
 let handler = async (m, { conn, text }) => {
     conn.flags = conn.flags ? conn.flags : {}
     
+    // Definir função checkAnswer
+    let checkAnswer = async (m) => {
+        let id = m.chat
+        if (m.chat == id && conn.flags[id]) {
+            let answer = m.text.toLowerCase().replace(/[^\w\s]/gi, '') // Remover caracteres especiais
+            let correctAnswer = conn.flags[id][1].name.toLowerCase().replace(/[^\w\s]/gi, '') // Remover caracteres especiais
+            if (answer.trim() === correctAnswer.trim()) {
+                conn.reply(m.chat, `✅ Parabéns! Você acertou! A bandeira era do ${conn.flags[id][1].name}.`, conn.flags[id][0])
+                clearTimeout(conn.flags[id][2])
+                delete conn.flags[id]
+            } else {
+                conn.reply(m.chat, `❌ Resposta incorreta. Tente novamente!`, conn.flags[id][0])
+            }
+        }
+    }
+    
     // Registrar a função checkAnswer como um listener de eventos para mensagens recebidas
     conn.on('chat-update', checkAnswer)
     
@@ -17,24 +33,11 @@ let handler = async (m, { conn, text }) => {
     ]
 }
 
-handler.checkAnswer = async (m, { conn, text }) => {
-    let id = m.chat
-    if (m.chat == id && conn.flags[id]) {
-        let answer = text.toLowerCase().replace(/[^\w\s]/gi, '') // Remover caracteres especiais
-        let correctAnswer = conn.flags[id][1].name.toLowerCase().replace(/[^\w\s]/gi, '') // Remover caracteres especiais
-        if (answer.trim() === correctAnswer.trim()) {
-            conn.reply(m.chat, `✅ Parabéns! Você acertou! A bandeira era do ${conn.flags[id][1].name}.`, conn.flags[id][0])
-            clearTimeout(conn.flags[id][2])
-            delete conn.flags[id]
-        } else {
-            conn.reply(m.chat, `❌ Resposta incorreta. Tente novamente!`, conn.flags[id][0])
-        }
-    }
+function pickRandomFlag() {
+    let countries = Object.keys(flags)
+    let randomCountry = countries[Math.floor(Math.random() * countries.length)]
+    return flags[randomCountry]
 }
-
-handler.help = ['adivinha']
-handler.tags = ['game']
-handler.command = ['adivinha', 'bandeira', 'guess', 'flag'] 
 
 let flags = {
     brasil: { name: 'Brasil', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png' },
@@ -49,12 +52,10 @@ let flags = {
     japon: { name: 'Japão', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/1280px-Flag_of_Japan.svg.png' },
 }
 
-function pickRandomFlag() {
-    let countries = Object.keys(flags)
-    let randomCountry = countries[Math.floor(Math.random() * countries.length)]
-    return flags[randomCountry]
-}
-
 handler.flags = flags
+
+handler.help = ['adivinha']
+handler.tags = ['game']
+handler.command = ['adivinha', 'bandeira', 'guess', 'flag'] 
 
 export default handler
