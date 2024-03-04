@@ -1,49 +1,86 @@
-import fs from 'node:fs';
-import axios from 'axios';
-import FormData from 'form-data';
+import fetch from 'node-fetch';
 
-const handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) throw `🤔 *Exemplo:* ${usedPrefix + command} Descreva a imagem que deseja gerar!`;
+const engineId = 'stable-diffusion-v1-6';
+const apiHost = process.env.API_HOST ?? 'https://api.stability.ai';
+const apiKey = 'sk-NbvK4EiYGquxKRLfmdbd3aJQjFR3xNIkLKNbbZCHdek4z4Aj'; // Substitua 'SUA_CHAVE_DE_API' pela sua chave de API
 
-  const apiKey = 'sk-NbvK4EiYGquxKRLfmdbd3aJQjFR3xNIkLKNbbZCHdek4z4Aj';
-
-  await conn.sendMessage(m.chat, { text: '*⌛ ESPERE UM MOMENTO, POR FAVOR...*' }, { quoted: m });
-
+const generateImageFromText = async (prompt) => {
   try {
-    const formData = new FormData();
-    formData.append('prompt', text);
-    formData.append('mode', 'search');
-    formData.append('search_prompt', 'dog');
-    formData.append('output_format', 'webp');
-    formData.append('image', fs.createReadStream('./husky-in-a-field.png'));
-
-    const response = await axios.post(
-      'https://api.stability.ai/v2alpha/generation/stable-image/inpaint',
-      formData,
+    const response = await fetch(
+      `${apiHost}/v1/generation/${engineId}/text-to-image`,
       {
-        validateStatus: undefined,
-        responseType: 'arraybuffer',
+        method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
           Authorization: `Bearer ${apiKey}`,
-          accept: 'image/*',
-          ...formData.getHeaders() // inclui o cabeçalho necessário para o FormData
         },
+        body: JSON.stringify({
+          text_prompts: [{ text: prompt, weight: 1 }],
+          cfg_scale: 7,
+          height: 1024,
+          width: 1024,
+          steps: 30,
+          samples: 1,
+        }),
       }
     );
 
-    if (response.status === 200) {
-      const tempFilePath = 'generated_image.webp';
-      fs.writeFileSync(tempFilePath, Buffer.from(response.data));
-      await conn.sendFile(m.chat, tempFilePath, 'generated_image.webp', '', m);
-      fs.unlinkSync(tempFilePath);
-    } else {
-      throw new Error(`${response.status}: ${response.data.toString()}`);
+    if (!response.ok) {
+      throw new Error(`Non-200 response: ${await response.text()}`);
     }
-  } catch (error) {
-    console.error('Erro:', error);
-    throw `*ERRO*: ${error.message}`;
-  }
-}
 
-handler.command = ['dalle', 'genimg', 'imggen'];
+    const responseJSON = await response.json();
+
+    return responseJSON.artifacts.map((imageGroup, index) => {
+      return imageGroup.map((image, i) => {
+        return { base64: image.base64, filename: `v1_txt2img_${index}_${i}.png` };
+      });
+    });
+  } catch (error) {
+    console.error('Error generating image:', error);
+    throw new Error(`Erro ao gerar imagem: ${error}`);
+  }
+};
+
+const handler = async (m, { text, conn, usedPrefix, command }) => {
+  if (!text && !(m.quoted && m.quoted.text)) {
+    throw `🤔 *Exemplo:* ${usedPrefix + command} Fale sobre a música Mr blue sky!`;
+  }
+
+  if (!text && m.quoted && m.quoted.text) {
+    text = m.quoted.text;
+  }
+
+  const rwait = '⏱️'; // Defina rwait conforme necessário
+  const done = '💬'; // Defina done conforme necessário
+  
+  try {
+    m.react(rwait);
+    const { key } = await conn.sendMessage(m.chat, {
+      caption: '_*Buscando uma resposta*_...'
+    }, {quoted: m});
+    conn.sendPresenceUpdate('composing', m.chat);
+    
+    const images = await generateImageFromText(text);
+    
+    // Envia as imagens geradas de volta ao remetente
+    images.forEach(async (imageGroup) => {
+      imageGroup.forEach(async (image) => {
+        const imgData = Buffer.from(image.base64, 'base64');
+        await conn.sendMessage(m.chat, imgData, 'imageMessage', { filename: image.filename });
+      });
+    });
+    
+    m.react(done);
+  } catch (error) {
+    console.error('Error:', error);
+    throw `*ERROR*: ${error.message}`; // Retorna a mensagem de erro específica
+  }
+};
+
+handler.help = ['dalle <text>'];
+handler.tags = ['ia', 'prime'];
+handler.command = ['dalle', 'aiimg'];
+
 export default handler;
