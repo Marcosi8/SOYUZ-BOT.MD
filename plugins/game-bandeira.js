@@ -16,9 +16,9 @@ let handler = async (m, { conn }) => {
     // Função para verificar a resposta do usuário
     let checkAnswer = async (m) => {
         if (m.chat == id && conn.flags[id]) {
-            let answer = m.text.toLowerCase()
-            let correctAnswer = conn.flags[id][1].name.toLowerCase()
-            if (answer === correctAnswer) {
+            let answer = m.text.toLowerCase().replace(/[^\w\s]/gi, '') // Remover caracteres especiais
+            let correctAnswer = conn.flags[id][1].name.toLowerCase().replace(/[^\w\s]/gi, '') // Remover caracteres especiais
+            if (answer.trim() === correctAnswer.trim()) {
                 conn.reply(m.chat, `✅ Parabéns! Você acertou! A bandeira era do ${conn.flags[id][1].name}.`, conn.flags[id][0])
                 clearTimeout(conn.flags[id][2])
                 delete conn.flags[id]
@@ -33,9 +33,9 @@ let handler = async (m, { conn }) => {
     conn.handler.all = conn.handler.all ? conn.handler.all : []
     conn.handler.all.push(checkAnswer)
 }
-handler.help = ['adivinha']
-handler.tags = ['game']
-handler.command = ['adivinha', 'bandeira', 'guess', 'flag'] 
+handler.help = ['bandeiras']
+handler.tags = ['game', 'prime']
+handler.command = ['adivinha', 'bandeira', 'bandeiras', 'flag'] 
 
 let flags = {
     brasil: { name: 'Brasil', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png' },
