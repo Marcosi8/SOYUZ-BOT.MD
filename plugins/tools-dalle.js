@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import fs from 'fs';
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `🤔 *Exemplo:* ${usedPrefix + command} Descreva a imagem que deseja gerar!`;
@@ -9,8 +10,10 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
   try {
     const response = await fetch(`https://platform.stability.ai/api/generate-image?text=${encodeURIComponent(text)}`, {
+      method: 'GET',
       headers: {
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${apiKey}`,
+        'Accept': 'image/png' // Defina conforme necessário
       }
     });
 
@@ -18,13 +21,17 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       throw new Error(`Erro ao chamar a API: ${response.status} ${response.statusText}`);
     }
 
-    const result = await response.json();
+    const buffer = await response.buffer();
 
-    if (!result.image_url) {
-      throw new Error('Não foi possível obter a URL da imagem gerada.');
-    }
+    // Salvar a imagem temporariamente
+    const tempFilePath = 'temp_image.png';
+    fs.writeFileSync(tempFilePath, buffer);
 
-    await conn.sendMessage(m.chat, { image: { url: result.image_url } }, { quoted: m });
+    // Enviar a imagem como mensagem de mídia
+    await conn.sendFile(m.chat, tempFilePath, 'image.png', '', m);
+
+    // Remover o arquivo temporário após o envio
+    fs.unlinkSync(tempFilePath);
   } catch (error) {
     console.error('Erro:', error);
     throw `*ERRO*: ${error.message}`;
