@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 const engineId = 'stable-diffusion-v1-6';
 const apiHost = process.env.API_HOST ?? 'https://api.stability.ai';
-const apiKey = 'sk-NbvK4EiYGquxKRLfmdbd3aJQjFR3xNIkLKNbbZCHdek4z4Aj'; // Sua chave de API
+const apiKey = 'SUA_CHAVE_DE_API'; // Substitua 'SUA_CHAVE_DE_API' pela sua chave de API
 
 const generateImageFromText = async (prompt) => {
   try {
@@ -43,32 +43,44 @@ const generateImageFromText = async (prompt) => {
   }
 };
 
-const handler = async (message) => {
-  const { body, quotedMsg } = message;
-  const command = body.toLowerCase();
+const handler = async (m, { text, conn, usedPrefix, command }) => {
+  if (!text && !(m.quoted && m.quoted.text)) {
+    throw `🤔 *Exemplo:* ${usedPrefix + command} Fale sobre a música Mr blue sky!`;
+  }
 
-  if (command.startsWith('!gerarimagem')) { // Comando para gerar imagem
-    try {
-      let prompt = body.slice(12).trim(); // Remova o comando "!gerarimagem" do prompt
-      if (!prompt && quotedMsg && quotedMsg.type === 'chat') {
-        prompt = quotedMsg.body; // Use a mensagem citada como prompt, se disponível
-      }
-      
-      if (!prompt) {
-        throw new Error('É necessário fornecer um prompt para gerar a imagem.');
-      }
+  if (!text && m.quoted && m.quoted.text) {
+    text = m.quoted.text;
+  }
 
-      const images = await generateImageFromText(prompt);
-      return images;
-    } catch (error) {
-      console.error('Error handling command:', error);
-      throw new Error(`Erro ao processar comando: ${error}`);
-    }
+  const rwait = '⏱️'; // Defina rwait conforme necessário
+  const done = '💬'; // Defina done conforme necessário
+  
+  try {
+    m.react(rwait);
+    const { key } = await conn.sendMessage(m.chat, {
+      caption: '_*Buscando uma resposta*_...'
+    }, {quoted: m});
+    conn.sendPresenceUpdate('composing', m.chat);
+    
+    const images = await generateImageFromText(text);
+    
+    // Envia as imagens geradas de volta ao remetente
+    images.forEach(async (imageGroup) => {
+      imageGroup.forEach(async (image) => {
+        const imgData = Buffer.from(image.base64, 'base64');
+        await conn.sendMessage(m.chat, imgData, 'imageMessage', { filename: image.filename });
+      });
+    });
+    
+    m.react(done);
+  } catch (error) {
+    console.error('Error:', error);
+    throw `*ERROR*: ${error.message}`; // Retorna a mensagem de erro específica
   }
 };
 
-handler.help = ['!gerarimagem <descrição>']; // Ajuda do comando
-handler.tags = ['ia', 'gerar']; // Tags relacionadas ao comando
-handler.command = ['gerarimagem']; // Comando para acionar o manipulador
+handler.help = ['chatgpt <text>'];
+handler.tags = ['ia', 'prime'];
+handler.command = ['ai', 'gpt', 'chat', 'chatgpt'];
 
 export default handler;
