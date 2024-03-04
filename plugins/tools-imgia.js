@@ -19,26 +19,33 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
 
     const aiImgAPI = `https://api.vihangayt.me/tools/aiimg?q=${prompt}`;
     
+    let imageUrls = [];
+
     try {
       let response = await fetch(aiImgAPI);
       let data = await response.json();
 
       if (data.status === true && data.data && data.data.length > 0) {
-        let imageUrls = data.data.slice(0, 4); // Obter os primeiros 4 URLs
-        for (let imageUrl of imageUrls) {
-          await conn.sendFile(m.chat, imageUrl, 'generated_image.jpg', `Imagem gerada com base em: ${text}`, m, false);
-        }
+        imageUrls = data.data.slice(0, 4); // Obter os primeiros 4 URLs
         m.react(done);
       } else {
         throw new Error('No valid data in the API response');
       }
     } catch (error) {
       console.error('Error from the API:', error);
-      throw `*ERROR*: ${error.message}`; // Retorna a mensagem de erro específica
+      throw `*ERROR*: ${error}`; // Retorna a mensagem de erro específica
+    }
+
+    if (imageUrls.length > 0) {
+      for (let imageUrl of imageUrls) {
+        await conn.sendFile(m.chat, imageUrl, 'generated_image.jpg', `Imagem gerada com base em: ${text}`, m, false);
+      }
+    } else {
+      throw new Error('No image URLs available');
     }
   } catch (error) {
     console.error('Error:', error);
-    throw `*ERROR*: ${error.message}`; // Retorna a mensagem de erro específica
+    throw `*ERROR*: ${error}`; // Retorna a mensagem de erro específica
   }
 };
 
