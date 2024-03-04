@@ -1,9 +1,6 @@
 let handler = async (m, { conn }) => {
     conn.flags = conn.flags ? conn.flags : {}
     
-    let te = `
-*Adivinhe de qual país é esta bandeira! Digite o nome do país para responder.*`
-    
     let id = m.chat
     if (id in conn.flags) return conn.reply(m.chat, `⚠️ ${mssg.gameOn}`, conn.flags[id][0])
     let flag = pickRandomFlag()
@@ -15,8 +12,9 @@ let handler = async (m, { conn }) => {
             delete conn.flags[id]
         }, 60000) // 60 segundos para adivinhar
     ]
-    conn.reply(m.chat, te, m)
-    conn.on('text', async (m) => {
+    
+    // Função para verificar a resposta do usuário
+    let checkAnswer = async (m) => {
         if (m.chat == id && conn.flags[id]) {
             let answer = m.text.toLowerCase()
             let correctAnswer = conn.flags[id][1].name.toLowerCase()
@@ -28,6 +26,11 @@ let handler = async (m, { conn }) => {
                 conn.reply(m.chat, `❌ Resposta incorreta. Tente novamente!`, conn.flags[id][0])
             }
         }
+    }
+    
+    // Registrando o evento de texto para verificar a resposta do usuário
+    conn.on('chat-update', async (m) => {
+        if (m.chat && m.chat.endsWith('@s.whatsapp.net')) checkAnswer(m)
     })
 }
 handler.help = ['adivinha']
