@@ -4,7 +4,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `🤔 *Exemplo:* ${usedPrefix + command} Descreva a imagem que deseja gerar!`;
 
   // Substitua 'lolkeysapi' pela sua chave de API, se necessário
-  const apiKey = 'sua_chave_de_api';
+  const apiKey = 'GataDios';
 
   await conn.sendMessage(m.chat, { text: '*⌛ ESPERE UN MOMENTO POR FAVOR...*' }, { quoted: m });
 
