@@ -34,7 +34,7 @@ handler.checkAnswer = async (m, { conn, text }) => {
 
 handler.help = ['bandeiras']
 handler.tags = ['game', 'prime']
-handler.command = ['adivinha', 'bandeira', 'bandeiras, 'flag'] 
+handler.command = ['adivinha', 'bandeira', 'bandeiras', 'flag'] 
 
 let flags = {
   brasil: { name: 'Brasil', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png' },
