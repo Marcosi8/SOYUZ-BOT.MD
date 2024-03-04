@@ -1,45 +1,78 @@
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-    conn.flags = conn.flags ? conn.flags : {}
+    conn.math = conn.math ? conn.math : {}
     
     let te = `
-🚩 *Jogo de Adivinhação de Bandeiras:* 
+🧮 *${mssg.gameMode}:* 
     
-${Object.keys(flags).join(' | ')} 
+${Object.keys(modes).join(' | ')} 
   
-*📌 Exemplo de uso:* _${usedPrefix+command} brasil_`
+*📌${mssg.example}:* _${usedPrefix+command} normal_`
     
-    if (args.length < 1) throw te
-    let country = args[0].toLowerCase()
-    if (!(country in flags)) throw te
+  if (args.length < 1) throw te
+  let mode = args[0].toLowerCase()
+  if (!(mode in modes)) throw te
     
-    let id = m.chat
-    if (id in conn.flags) return conn.reply(m.chat, `⚠️ ${mssg.gameOn}`, conn.flags[id][0])
-    let flag = pickFlag(country)
-    conn.flags[id] = [
-        await conn.sendFile(m.chat, flag.image, 'flag.png', `Adivinhe a bandeira deste país!`, m),
-        flag,
+  let id = m.chat
+    if (id in conn.math) return conn.reply(m.chat, `⚠️ ${mssg.mathOn}`, conn.math[id][0])
+    let math = genMath(mode)
+    conn.math[id] = [
+        await conn.reply(m.chat, `> Quanto é *${math.str}*=\n\n*${mssg.time}:* _${(math.time / 1000).toFixed(2)}_ *${mssg.second}*\n\n🎁 ${mssg.reward} : ${math.bonus} 🪙`, m),
+        math, 4,
         setTimeout(() => {
-            if (conn.flags[id]) conn.reply(m.chat, `⏳ O tempo acabou! A bandeira era do ${flag.name}.`, conn.flags[id][0])
-            delete conn.flags[id]
-        }, 60000) // 60 segundos para adivinhar
+            if (conn.math[id]) conn.reply(m.chat, `⏳ ${mssg.timeOff} *${math.result}*`, conn.math[id][0])
+      delete conn.math[id]
+        }, math.time)
     ]
 }
-handler.help = ['adivinha <país>']
+handler.help = ['mates <modo>']
 handler.tags = ['game']
-handler.command = ['adivinha', 'bandeira', 'guess', 'flag'] 
+handler.command = ['mates', 'mate', 'matemáticas', 'math'] 
 
-let flags = {
-    brasil: { name: 'Brasil', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png' },
-    estadosunidos: { name: 'Estados Unidos', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png' },
-    canada: { name: 'Canadá', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1280px-Flag_of_Canada_%28Pantone%29.svg.png' },
-    india: { name: 'Índia', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/1280px-Flag_of_India.svg.png' },
-    china: { name: 'China', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1280px-Flag_of_the_People%27s_Republic_of_China.svg.png' }
+
+let modes = {
+  noob: [-3, 3,-3, 3, '+-', 15000, 80],
+  fácil: [-10, 10, -10, 10, '*/+-', 20000, 100],
+  normal: [-40, 40, -20, 20, '*/+-', 40000, 250],
+  difícil: [-100, 100, -70, 70, '*/+-', 30000, 500],
+  extremo: [-999999, 999999, -999999, 999999, '*/', 30000, 800],
+  imposible: [-99999999999, 99999999999, -99999999999, 999999999999, '*/', 30000, 1500],
+  imposible2: [-999999999999999, 999999999999999, -999, 999, '/', 30000, 3000]
 }
 
-function pickFlag(country) {
-    return flags[country]
+let operators = {
+    '+': '+',
+    '-': '-',
+    '*': '×',
+    '/': '÷'
 }
 
-handler.flags = flags
+function genMath(mode) {
+    let [a1, a2, b1, b2, ops, time, bonus] = modes[mode]
+    let a = randomInt(a1, a2)
+    let b = randomInt(b1, b2)
+    let op = pickRandom([...ops])
+    let result = (new Function(`return ${a} ${op.replace('/', '*')} ${b < 0 ? `(${b})` : b}`))()
+    if (op == '/') [a, result] = [result, a]
+    return {
+        str: `${a} ${operators[op]} ${b}`,
+        mode,
+        time,
+        bonus,
+        result
+    }
+}
+
+function randomInt(from, to) {
+    if (from > to) [from, to] = [to, from]
+    from = Math.floor(from)
+    to = Math.floor(to)
+    return Math.floor((to - from) * Math.random() + from)
+}
+
+function pickRandom(list) {
+    return list[Math.floor(Math.random() * list.length)]
+}
+
+handler.modes = modes
 
 export default handler
