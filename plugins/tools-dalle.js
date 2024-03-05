@@ -1,51 +1,11 @@
 import fetch from 'node-fetch';
 
-const engineId = 'stable-diffusion-v1-6';
-const apiHost = process.env.API_HOST ?? 'https://api.stability.ai';
-const apiKey = 'sk-NbvK4EiYGquxKRLfmdbd3aJQjFR3xNIkLKNbbZCHdek4z4Aj'; // Substitua 'SUA_CHAVE_DE_API' pela sua chave de API
+// Insira sua chave da API do OpenAI DALL-E aqui
+const OPENAI_API_KEY = 'SUA_CHAVE_API_OPENAI_DALLE';
 
-const generateImageFromText = async (prompt) => {
-  try {
-    const response = await fetch(
-      `${apiHost}/v1/generation/${engineId}/text-to-image`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          text_prompts: [{ text: prompt, weight: 1 }],
-          cfg_scale: 7,
-          height: 1024,
-          width: 1024,
-          steps: 30,
-          samples: 1,
-        }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`Non-200 response: ${await response.text()}`);
-    }
-
-    const responseJSON = await response.json();
-
-    return responseJSON.artifacts.map((imageGroup, index) => {
-      return imageGroup.map((image, i) => {
-        return { base64: image.base64, filename: `v1_txt2img_${index}_${i}.png` };
-      });
-    });
-  } catch (error) {
-    console.error('Error generating image:', error);
-    throw new Error(`Erro ao gerar imagem: ${error}`);
-  }
-};
-
-const handler = async (m, { text, conn, usedPrefix, command }) => {
+let handler = async (m, { text, conn, usedPrefix, command }) => {
   if (!text && !(m.quoted && m.quoted.text)) {
-    throw `🤔 *Exemplo:* ${usedPrefix + command} Fale sobre a música Mr blue sky!`;
+    throw `🤔 *Exemplo:* ${usedPrefix + command} Um astronauta na lama.`;
   }
 
   if (!text && m.quoted && m.quoted.text) {
@@ -54,33 +14,55 @@ const handler = async (m, { text, conn, usedPrefix, command }) => {
 
   const rwait = '⏱️'; // Defina rwait conforme necessário
   const done = '💬'; // Defina done conforme necessário
-  
+
   try {
     m.react(rwait);
     const { key } = await conn.sendMessage(m.chat, {
-      caption: '_*Buscando uma resposta*_...'
+      image: '',
+      caption: '_*Criando uma imagem*_...'
     }, {quoted: m});
     conn.sendPresenceUpdate('composing', m.chat);
     
-    const images = await generateImageFromText(text);
+    // Verifique se a chave da API do OpenAI DALL-E está configurada
+    if (!OPENAI_API_KEY) {
+      throw 'Você não configurou a chave da API do OpenAI DALL-E.';
+    }
+
+    const apiUrl = 'https://api.openai.com/v1/images/generations';
     
-    // Envia as imagens geradas de volta ao remetente
-    images.forEach(async (imageGroup) => {
-      imageGroup.forEach(async (image) => {
-        const imgData = Buffer.from(image.base64, 'base64');
-        await conn.sendMessage(m.chat, imgData, 'imageMessage', { filename: image.filename });
-      });
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'image-dalle-000',
+        prompt: text,
+        size: '256x256',
+        response_format: 'url'
+      })
     });
     
-    m.react(done);
+    const responseData = await response.json();
+    
+    if (response.ok) {
+      const imageUrl = responseData.url;
+      
+      await conn.sendFile(m.chat, imageUrl, 'image-dalle.jpg', '', m, 0, { thumbnail: Buffer.alloc(0) });
+      
+      m.react(done);
+    } else {
+      throw new Error('Erro na solicitação para a API OpenAI DALL-E');
+    }
   } catch (error) {
     console.error('Error:', error);
     throw `*ERROR*: ${error.message}`; // Retorna a mensagem de erro específica
   }
 };
 
-handler.help = ['dalle <text>'];
-handler.tags = ['ia', 'prime'];
-handler.command = ['dalle', 'aiimg'];
+handler.help = ['dalle <text>']
+handler.tags = ['ia', 'prime']
+handler.command = ['dalle', 'dall-e']
 
 export default handler;
