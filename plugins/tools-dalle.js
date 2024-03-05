@@ -23,9 +23,9 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
     }, {quoted: m});
     conn.sendPresenceUpdate('composing', m.chat);
     
-    // Verifique se a chave da API do OpenAI DALL-E está configurada
-    if (!OPENAI_API_KEY) {
-      throw 'Você não configurou a chave da API do OpenAI DALL-E.';
+    // Verifique se a chave da API do OpenAI DALL-E está configurada corretamente
+    if (!OPENAI_API_KEY || OPENAI_API_KEY === 'SUA_CHAVE_API_OPENAI_DALLE') {
+      throw 'Você não configurou corretamente a chave da API do OpenAI DALL-E.';
     }
 
     const apiUrl = 'https://api.openai.com/v1/images/generations';
