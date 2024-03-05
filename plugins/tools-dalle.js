@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 // Insira sua chave da API do OpenAI DALL-E aqui
-const OPENAI_API_KEY = 'SUA_CHAVE_API_OPENAI_DALLE';
+const OPENAI_API_KEY = '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';
 
 let handler = async (m, { text, conn, usedPrefix, command }) => {
   if (!text && !(m.quoted && m.quoted.text)) {
