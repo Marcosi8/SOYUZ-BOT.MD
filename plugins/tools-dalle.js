@@ -1,7 +1,10 @@
-import fetch from 'node-fetch';
+import { Configuration, OpenAIApi, OpenAIApiException } from 'openai';
 
-// Insira sua chave da API do OpenAI DALL-E aqui
-const OPENAI_API_KEY = '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';
+// Configure a biblioteca com sua chave de API
+const configuration = new Configuration({
+  apiKey: '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'
+});
+const openai = new OpenAIApi(configuration);
 
 let handler = async (m, { text, conn, usedPrefix, command }) => {
   if (!text && !(m.quoted && m.quoted.text)) {
@@ -22,39 +25,16 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
       caption: '_*Criando uma imagem*_...'
     }, {quoted: m});
     conn.sendPresenceUpdate('composing', m.chat);
-    
-    // Verifique se a chave da API do OpenAI DALL-E está configurada corretamente
-    if (!OPENAI_API_KEY || OPENAI_API_KEY === 'SUA_CHAVE_API_OPENAI_DALLE') {
-      throw 'Você não configurou corretamente a chave da API do OpenAI DALL-E.';
-    }
 
-    const apiUrl = 'https://api.openai.com/v1/images/generations';
-    
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: 'image-dalle-000',
-        prompt: text,
-        size: '256x256',
-        response_format: 'url'
-      })
+    const response = await openai.images.create({
+      prompt: text,
+      apiKey: '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'
     });
-    
-    const responseData = await response.json();
-    
-    if (response.ok) {
-      const imageUrl = responseData.url;
+
+    const imageUrl = response.data.url;
+    await conn.sendFile(m.chat, imageUrl, 'image-dalle.jpg', '', m, 0, { thumbnail: Buffer.alloc(0) });
       
-      await conn.sendFile(m.chat, imageUrl, 'image-dalle.jpg', '', m, 0, { thumbnail: Buffer.alloc(0) });
-      
-      m.react(done);
-    } else {
-      throw new Error('Erro na solicitação para a API OpenAI DALL-E');
-    }
+    m.react(done);
   } catch (error) {
     console.error('Error:', error);
     throw `*ERROR*: ${error.message}`; // Retorna a mensagem de erro específica
@@ -65,4 +45,4 @@ handler.help = ['dalle <text>']
 handler.tags = ['ia', 'prime']
 handler.command = ['dalle', 'dall-e']
 
-export default handler;
+export default handler
