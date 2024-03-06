@@ -42,7 +42,7 @@ let handler = async (m, { text, conn }) => {
   }
 };
 
-handler.command = ['dalle']
-handler.tags = ['dalle']
+handler.command = ['marcos']
+handler.tags = ['marcos']
 handler.help = ['dalle <texto>']
 export default handler
