@@ -45,4 +45,4 @@ handler.help = ['dalle <text>']
 handler.tags = ['ia', 'prime']
 handler.command = ['dalle', 'dall-e']
 
-export default handler
+export default handler;
