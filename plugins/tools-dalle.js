@@ -42,7 +42,7 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
     fs.writeFileSync(tempImagePath, imageBuffer);
 
     // Envie o arquivo local temporário
-    await conn.sendFile(m.chat, tempImagePath);
+    await conn.sendFile(m.chat, {file: tempImagePath, mimetype: 'image/jpeg', filename: 'image-dalle.jpg'});
 
     // Remova o arquivo temporário
     fs.unlinkSync(tempImagePath);
@@ -58,4 +58,4 @@ handler.help = ['dalle <text>']
 handler.tags = ['ia', 'prime']
 handler.command = ['dalle', 'dall-e']
 
-export default handler;
+export default handler
