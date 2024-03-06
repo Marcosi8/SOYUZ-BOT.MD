@@ -1,4 +1,6 @@
 import { Configuration, OpenAIApi, OpenAIApiException } from 'openai';
+import fetch from 'node-fetch';
+import fs from 'fs';
 
 // Configure a biblioteca com sua chave de API
 const configuration = new Configuration({
@@ -32,8 +34,19 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
     });
 
     const imageUrl = response.data.url;
-    await conn.sendFile(m.chat, imageUrl, 'image-dalle.jpg', '', m, 0, { thumbnail: Buffer.alloc(0) });
-      
+
+    // Faça o download da imagem para um arquivo local temporário
+    const imageResponse = await fetch(imageUrl);
+    const imageBuffer = await imageResponse.buffer();
+    const tempImagePath = 'image-dalle.jpg';
+    fs.writeFileSync(tempImagePath, imageBuffer);
+
+    // Envie o arquivo local temporário
+    await conn.sendFile(m.chat, tempImagePath, '', '', m, 0, { thumbnail: Buffer.alloc(0) });
+
+    // Remova o arquivo temporário
+    fs.unlinkSync(tempImagePath);
+
     m.react(done);
   } catch (error) {
     console.error('Error:', error);
