@@ -16,11 +16,11 @@ let handler = async (m, { text, conn }) => {
     text = m.quoted.text;
   }
 
-  const rwait = '⏱️'; // Defina rwait conforme necessário
-  const done = '💬'; // Defina done conforme necessário
+  const rwait = '⏱️' // Defina rwait conforme necessário
+  const done = '💬' // Defina done conforme necessário
 
   try {
-    m.react(rwait);
+    m.react(rwait)
 
     const response = await openai.images.create({
       prompt: text
@@ -30,10 +30,10 @@ let handler = async (m, { text, conn }) => {
 
     // Faça o download da imagem
     const imageResponse = await fetch(imageUrl);
-    const imageBuffer = await imageResponse.arrayBuffer();
+    const imageBuffer = await imageResponse.buffer();
 
     // Envie a imagem no WhatsApp
-    await conn.sendFile(m.chat, Buffer.from(imageBuffer), 'image-dalle.jpg', '');
+    await conn.sendFile(m.chat, imageBuffer, 'image-dalle.jpg', '');
 
     m.react(done);
   } catch (error) {
@@ -45,4 +45,4 @@ let handler = async (m, { text, conn }) => {
 handler.command = ['dalle']
 handler.tags = ['dalle']
 handler.help = ['dalle <texto>']
-export default handler;
+export default handler
