@@ -30,10 +30,10 @@ let handler = async (m, { text, conn }) => {
 
     // Faça o download da imagem
     const imageResponse = await fetch(imageUrl);
-    const imageBuffer = await imageResponse.buffer();
+    const imageBuffer = await imageResponse.arrayBuffer();
 
     // Envie a imagem no WhatsApp
-    await conn.sendFile(m.chat, imageBuffer, 'image-dalle.jpg', '');
+    await conn.sendFile(m.chat, Buffer.from(imageBuffer), 'image-dalle.jpg', '');
 
     m.react(done);
   } catch (error) {
