@@ -42,7 +42,7 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
     fs.writeFileSync(tempImagePath, imageBuffer);
 
     // Envie o arquivo local temporário
-    await conn.sendFile(m.chat, tempImagePath, '', '', m, 0, { thumbnail: Buffer.alloc(0) });
+    await conn.sendFile(m.chat, tempImagePath);
 
     // Remova o arquivo temporário
     fs.unlinkSync(tempImagePath);
