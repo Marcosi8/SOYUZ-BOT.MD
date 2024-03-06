@@ -1,6 +1,5 @@
 import { Configuration, OpenAIApi, OpenAIApiException } from 'openai';
 import fetch from 'node-fetch';
-import fs from 'fs';
 
 // Configure a biblioteca com sua chave de API
 const configuration = new Configuration({
@@ -8,9 +7,9 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-let handler = async (m, { text, conn, usedPrefix, command }) => {
+let handler = async (m, { text, conn }) => {
   if (!text && !(m.quoted && m.quoted.text)) {
-    throw `🤔 *Exemplo:* ${usedPrefix + command} Um astronauta na lama.`;
+    throw `🤔 *Exemplo:* !dalle Um astronauta na lama.`;
   }
 
   if (!text && m.quoted && m.quoted.text) {
@@ -22,30 +21,19 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
 
   try {
     m.react(rwait);
-    const { key } = await conn.sendMessage(m.chat, {
-      image: '',
-      caption: '_*Criando uma imagem*_...'
-    }, {quoted: m});
-    conn.sendPresenceUpdate('composing', m.chat);
 
     const response = await openai.images.create({
-      prompt: text,
-      apiKey: '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'
+      prompt: text
     });
 
     const imageUrl = response.data.url;
 
-    // Faça o download da imagem para um arquivo local temporário
+    // Faça o download da imagem
     const imageResponse = await fetch(imageUrl);
     const imageBuffer = await imageResponse.buffer();
-    const tempImagePath = 'image-dalle.jpg';
-    fs.writeFileSync(tempImagePath, imageBuffer);
 
-    // Envie o arquivo local temporário
-    await conn.sendFile(m.chat, tempImagePath, 'image-dalle.jpg');
-
-    // Remova o arquivo temporário
-    fs.unlinkSync(tempImagePath);
+    // Envie a imagem no WhatsApp
+    await conn.sendFile(m.chat, imageBuffer, 'image-dalle.jpg', '');
 
     m.react(done);
   } catch (error) {
@@ -54,8 +42,7 @@ let handler = async (m, { text, conn, usedPrefix, command }) => {
   }
 };
 
-handler.help = ['dalle <text>']
-handler.tags = ['ia', 'prime']
-handler.command = ['dalle', 'dall-e']
-
+handler.command = ['dalle']
+handler.tags = ['dalle']
+handler.help = ['dalle <texto>']
 export default handler;
