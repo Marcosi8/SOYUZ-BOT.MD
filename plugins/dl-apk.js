@@ -27,8 +27,7 @@ let handler = async (m, { conn, usedPrefix: prefix, command, text }) => {
 
       await conn.sendMessage(
         m.chat,
-        { document: { url: apkData.dllink }, mimetype: 'application/vnd.android.package-archive', fileName: apkData.name + '.apk', caption: response },
-        { quoted: m }
+        { document: { url: apkData.dllink }, mimetype: 'application/vnd.android.package-archive', fileName: apkData.name + '.apk', caption: response }
       )
     }
     m.react('👍')
