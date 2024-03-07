@@ -1,28 +1,38 @@
-import { download } from 'aptoide-scraper';
+import { download, search } from 'aptoide-scraper';
 
 let handler = async (m, { conn, usedPrefix: prefix, command, text }) => {
   try {
     if (command === 'modapk', 'apk', 'app') {
-      if (!text) throw `*[❗] Forneça o nome do APK que você deseja baixar!.*`;
+      if (!text) throw `*[❗] Forneça o nome do APK que você deseja baixar!*`;
       m.react(rwait)
       await conn.reply(m.chat, global.wait, m);
-      let data = await download(text);
+      let searchResults = await search(text);
+      let apkData = await download(searchResults[0].id);
 
-      if (data.size.replace(' MB', '') > 200) {
+      let response = `
+┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+┃💫 Nome do Aplicativo: ${searchResults[0].name}: ${apkData.name}
+┃📦 Pacote: ${apkData.package}
+┃🕒 Última Atualização: ${apkData.lastup}
+┃💪 Tamanho: ${apkData.size}
+┃┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+┃ Download concluído. 🚀🚀🚀`;
+
+      if (apkData.size.replace(' MB', '') > 200) {
         return await conn.sendMessage(m.chat, { text: '*[⛔] O arquivo é muito grande.*' }, { quoted: m });
       }
 
-      if (data.size.includes('GB')) {
+      if (apkData.size.includes('GB')) {
         return await conn.sendMessage(m.chat, { text: '*[⛔] O arquivo é muito pesado.*' }, { quoted: m });
       }
 
       await conn.sendMessage(
         m.chat,
-        { document: { url: data.dllink }, mimetype: 'application/vnd.android.package-archive', fileName: data.name + '.apk', caption: null },
+        { document: { url: apkData.dllink }, mimetype: 'application/vnd.android.package-archive', fileName: apkData.name + '.apk', caption: response },
         { quoted: m }
       )
     }
-  m.react(done)
+    m.react(done)
   } catch {
     throw `*[🪩] Certifique-se de fornecer um nome/link válido.*`;
   }
