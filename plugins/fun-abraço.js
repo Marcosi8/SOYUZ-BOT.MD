@@ -10,7 +10,7 @@ let abrazo = await conn.reply(m.chat, `@${m.sender.split('@')[0]}  Deu um abraç
 
 conn.sendMessage(m.chat, { react: { text: '🫂', key: abrazo.key }})
 }
-handler.help = ['abraço]
+handler.help = ['abraço']
 handler.tags = ['fun']
 handler.command = /^abraço|abracar|abraçar$/i
 export default handler
