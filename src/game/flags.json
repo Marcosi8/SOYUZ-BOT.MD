@@ -1,0 +1,22 @@
+[
+    {"question": "🇧🇷", "response": "Brasil" },
+    {"question": "🇺🇸", "response": "Estados Unidos" },
+    {"question": "🇨🇦", "response": "Canadá" },
+    {"question": "🇬🇧", "response": "Reino Unido" },
+    {"question": "🇯🇵", "response": "Japão" },
+    {"question": "🇨🇳", "response": "China" },
+    {"question": "🇩🇪", "response": "Alemanha" },
+    {"question": "🇫🇷", "response": "França" },
+    {"question": "🇮🇹", "response": "Itália" },
+    {"question": "🇪🇸", "response": "Espanha" },
+    {"question": "🇦🇺", "response": "Austrália" },
+    {"question": "🇧🇪", "response": "Bélgica" },
+    {"question": "🇷🇺", "response": "Rússia" },
+    {"question": "🇿🇦", "response": "África do Sul" },
+    {"question": "🇲🇽", "response": "México" },
+    {"question": "🇦🇷", "response": "Argentina" },
+    {"question": "🇨🇴", "response": "Colômbia" },
+    {"question": "🇸🇦", "response": "Arábia Saudita" },
+    {"question": "🇮🇳", "response": "Índia" },
+    {"question": "🇮🇩", "response": "Indonésia" }
+]
