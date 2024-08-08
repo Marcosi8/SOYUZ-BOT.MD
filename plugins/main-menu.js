@@ -32,25 +32,13 @@ let tags = {
 }
 const defaultMenu = {
   before: `
-  *Soyuzᴮᴼᵀ*
- 
 > 🌎 *Oi!* %name
 > 📅 %week %date
-
-> 🚀 *Usuários:* %totalreg 
-> 🗂 *Registros:* %rtotalreg
 > ♻️ *Tempo Ativo:* %muptime 
 %sbot
-> 💎 %diamond
-> 🎰 *Nivel:* %role *XP:* %level
-
 ┗│ [❗️] *Versão:* 1.4.0
 
 > *Lista de Comandos* ↙️
-              %readmore
-
-🪙 = *REQUER PREMIUM*
-💎 = *REQUER DIAMANTES*
 `.trimStart(),
   header: '> *%category*',
   body: '```%cmd``` %isdiamond %isPremium',
