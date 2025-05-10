@@ -34,7 +34,7 @@
 
 ## Sumário
 - [Dúvidas ⛔️](#dúvidas-)
-- [Mudar o número do dono aqui](#mudar-o-número-do-dono-aqui)
+- [Seu NUMERO aqui](#mudar-o-número-do-dono-aqui)
 - [Instalar em Termux](#instalar-no-termux)
 - [Implante no Replit](#implante-no-replit)
 - [Implante no Heroku](#implante-no-heroku)
@@ -46,12 +46,11 @@
 ## Dúvidas ⛔️
 
 - [Entre em contato comigo no WhatsApp](https://wa.me/558881647724?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20o%20bot)
-- Meu e-mail: [marcosrian494@gmail.com](mailto:marcosrian494@gmail.com) 
+- Email: 
 
 ---
 
-## Mudar o número do dono aqui
-
+## 
 [![Bifurcar Repositório](https://img.shields.io/badge/Bifurcar-Repositorio-blue?style=for-the-badge&logo=github)](https://github.com/Marcosi8/SOYUZ-BOT.MD/fork)
 
 [Clique aqui para acessar o arquivo config.js](https://github.com/Marcosi8/SOYUZ-BOT.MD/blob/main/config.js)
